@@ -1,0 +1,39 @@
+{% extends "VentaseInventario/template.html" %}
+{% load static %}
+
+{% block titulo %}Inventario{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'styles/inventario.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block body %}
+<div class="inventario-container">
+    <div>
+        <div class="prodCliProv">
+            <button class="botonProductos"><a href="{% url 'productos' %}" style="text-decoration: none;color: #363062;"><p>Producto</p></a></button>
+            <button class="botonProveedor"><a href="{% url 'proveedores' %}" style="text-decoration: none;color: #363062;"><p>Proveedor</p></a></button>
+            <button class="botonCliente"><a href="{% url 'clientes' %}" style="text-decoration: none;color: #363062;"><p>Clientes</p></a></button>
+        </div>
+    </div>
+    <div class="header-inventario">
+        {% block header %}
+
+        {% endblock %}
+    </div>
+    <div class="tabla-inventario">
+        {% block tabla %}
+
+        {% endblock %}
+    </div>
+    <div class="botones-inventario">
+        {% block botones %}
+
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'scripts/inventario.js' %}"></script>
+{% endblock %}

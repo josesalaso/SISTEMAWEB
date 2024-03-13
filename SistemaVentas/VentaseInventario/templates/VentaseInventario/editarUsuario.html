@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+         :root {
+            --color-primario: #363062;
+            --color-secundario: #4D4C7D;
+            --color-terciario: #F99417;
+            --color-cuartario: #F5F5F5;
+        }
+        
+        body {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            background-color: var(--color-primario);
+            color: var(--color-cuartario);
+            border: 1px solid var(--color-terciario);
+        }
+        
+        .btn {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{% if message.tags == 'success' %}alert alert-success{% elif message.tags == 'error' %}alert alert-danger{% endif %}">
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="container">
+        <h1>Editar Usuario</h1>
+        <form id="product-form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nombreUsuario">Nombre Usuario:</label>
+                <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" value="{{ usuario.nombreUsuario }}" required>
+            </div>
+            <div class="form-group">
+                <label for="emailUsuario">Correo Electronico:</label>
+                <input type="email" class="form-control" id="emailUsuario" name="emailUsuario" value="{{ usuario.emailUsuario }}" required></input>
+            </div>
+            <div class="form-group">
+                <label for="roles">Roles:</label>
+                <!-- Admin -->
+                {% if usuario.rolUsuario == 'admin' %}
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="admin" name="admin" onclick="seleccionarRoles('admin')" checked>
+                    <label class="form-check-label" for="admin">Admin</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ventas" name="ventas" onclick="bloquearAdmin(this)" disabled>
+                    <label class="form-check-label" for="ventas" checked>Ventas</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="inventario" name="inventario" onclick="bloquearAdmin(this)" disabled>
+                    <label class="form-check-label" for="inventario">Inventario</label>
+                </div>
+                <!-- ventas e inventario -->
+                {% elif usuario.rolUsuario == 'ventasInventario' %}
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="admin" name="admin" onclick="seleccionarRoles('admin')">
+                    <label class="form-check-label" for="admin">Admin</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ventas" name="ventas" onclick="bloquearAdmin(this)" checked>
+                    <label class="form-check-label" for="ventas" checked>Ventas</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="inventario" name="inventario" onclick="bloquearAdmin(this)" checked>
+                    <label class="form-check-label" for="inventario">Inventario</label>
+                </div>
+                <!-- ventas -->
+                {% elif usuario.rolUsuario == 'ventas' %}
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="admin" name="admin" onclick="seleccionarRoles('admin')">
+                    <label class="form-check-label" for="admin">Admin</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ventas" name="ventas" onclick="bloquearAdmin(this)" checked>
+                    <label class="form-check-label" for="ventas" checked>Ventas</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="inventario" name="inventario" onclick="bloquearAdmin(this)">
+                    <label class="form-check-label" for="inventario">Inventario</label>
+                </div>
+                <!-- inventario -->
+                {% elif usuario.rolUsuario == 'inventario' %}
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="admin" name="admin" onclick="seleccionarRoles('admin')">
+                    <label class="form-check-label" for="admin">Admin</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ventas" name="ventas" onclick="bloquearAdmin(this)">
+                    <label class="form-check-label" for="ventas" checked>Ventas</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="inventario" name="inventario" onclick="bloquearAdmin(this)" checked>
+                    <label class="form-check-label" for="inventario">Inventario</label>
+                </div>
+                {% endif %}
+            </div>
+            <button type="button" class="btn btn-danger" id="cancelar-button">Atras</button>
+            <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('cancelar-button').addEventListener('click', function() {
+            window.location.href = 'http://127.0.0.1:8000/usuario';
+        });
+
+        function seleccionarRoles(rol) {
+            if (rol === 'admin') {
+                document.getElementById('ventas').checked = true;
+                document.getElementById('inventario').checked = true;
+            }
+        }
+
+        function bloquearDesbloquearAdmin(checkbox) {
+            var adminCheckbox = document.getElementById('admin');
+            if (checkbox.checked) {
+                adminCheckbox.checked = false;
+                adminCheckbox.disabled = true;
+            } else {
+                adminCheckbox.disabled = false;
+            }
+        }
+
+        function limpiarFormulario() {
+            document.getElementById('nombreUsuario').value = '';
+            document.getElementById('emailUsuario').value = '';
+            document.getElementById('psswUsuario').value = '';
+            document.getElementById('admin').checked = false;
+            document.getElementById('ventas').checked = false;
+            document.getElementById('inventario').checked = false;
+        }
+    </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% if messages %} {% for m in messages %}
+<script>
+    swal.fire({
+        "title": "HECHO",
+        "text": "{{m}}",
+        "icon": "success"
+    })
+</script>
+{% endfor %} {% endif %}
+
+
+</html>

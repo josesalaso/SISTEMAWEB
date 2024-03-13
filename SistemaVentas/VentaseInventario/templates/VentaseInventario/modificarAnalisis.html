@@ -1,0 +1,127 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+         :root {
+            --color-primario: #363062;
+            --color-secundario: #4D4C7D;
+            --color-terciario: #F99417;
+            --color-cuartario: #F5F5F5;
+        }
+        
+        body {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+        }
+        
+        .container {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+            padding: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--color-cuartario);
+            color: var(--color-primario);
+        }
+        
+        th,
+        td {
+            border: 1px solid var(--color-primario);
+            padding: 10px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: var(--color-primario);
+            color: var(--color-cuartario);
+        }
+        
+        img {
+            width: 150px;
+        }
+        
+        .button-container {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .modificar-button {
+            background-color: var(--color-terciario);
+            color: var(--color-primario);
+            border: none;
+        }
+        
+        .seleccionar-checkbox {
+            margin: 0;
+        }
+        
+        .button:hover {
+            background-color: var(--color-cuartario);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Tabla</th>
+                    <th>Variable X</th>
+                    <th>Variable Y</th>
+                    <th>Tipo Gráfico</th>
+                    <th>Usuario creador</th>
+                    <th>Gráfico</th>
+                    <th>ID</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="analisis-table-body">
+                {% for ana in analisis %}
+                <tr>
+                    <td>{{ ana.titulo }}</td>
+                    <td>{{ ana.tabla }}</td>
+                    <td>{{ ana.variableX }}</td>
+                    <td>{{ ana.variableY }}</td>
+                    <td>{{ ana.tipoGrafico }}</td>
+                    <td>{{ ana.idUsuario }}</td>
+                    <td><img src="{% static ana.imgAnalisis %}" alt="Grafico actual"></td>
+                    <td>{{ ana.id }}</td>
+                    <td>
+                        <form method="post" action="{% url 'editarAnalisis' %}">
+                            {% csrf_token %}
+                            <input type="number" value="{{ ana.id }}" name="ana" style="display: none;">
+                            <a href="{% url 'editarAnalisis' %}?analisis_id={{ ana.id }}" class="btn btn-success modificar-button">Modificar</a>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url 'eliminar_analisis' ana.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-danger" onclick="return confirmarEliminacion('{{ ana.id }}')">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="{% static 'scripts/analisis.js' %}"></script>
+
+</html>

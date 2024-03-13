@@ -1,0 +1,57 @@
+{% extends "VentaseInventario/template.html" %}
+{% load static %}
+
+{% block style %}<link rel="stylesheet" href="{% static 'styles/usuario.css' %}?{% now 'U' %}">{% endblock %}
+
+{% block body %}
+<div class="ventas-container">
+    <div class="header-ventas">
+        <div class="titulo-ventas">
+            <h1>Usuarios</h1>
+        </div>
+        <div class="buscador-ventas">
+            <input type="text" id="searchInput" class="searchInput" placeholder="Buscar...">
+        </div>
+    </div>
+    <div class="tabla-ventas">
+        <div class="divTabla">
+            <table id="dataTable">
+                <tr>
+                    <th>ID</th>
+                    <th>Rol</th>
+                    <th>Nombre</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+                {% for usr in usuarios %}
+                <tr>
+                    <td>{{ usr.id }}</td>
+                    <td>{{ usr.rolUsuario }}</td>
+                    <td>{{ usr.nombreUsuario }}</td>
+                    <td>
+                        <form method="post" action="{% url 'editarUsuario' %}">
+                            {% csrf_token %}
+                            <input type="text" value="{{ usr.id }}"  name="usuario_id" style="display: none;">
+                            <a href="{% url 'editarUsuario' %}?usuario_id={{ usr.id }}" class="btn btn-success modificar-button">Modificar</a>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url 'eliminar_usuario' usr.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-danger eliminar-button" onclick="return confirmarEliminacion('{{ usr.id }}')">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="botones-ventas">
+        <button class="boton-venta"><a id="abrirVentana">Agregar Usuario</a></button>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'scripts/usuario.js' %}"></script>
+{% endblock %}

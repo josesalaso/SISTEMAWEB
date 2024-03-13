@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Web</title>
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}?{% now 'U' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"  rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="dist/css/poncho.min.css" rel="stylesheet">
+    <link href="dist/css/icono-arg.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="menu-lateral" id="menu-lateral">
+        <a href="#" class="logo"><img src="{% static 'img/logo.PNG' %}" class="logo-img"></a>
+        <ul class="navegacion" id="navegacion">
+            <li id="menu-toggle" class="expand-collapse"><a href="#"><i class="fa-solid fa-bars"></i><p>Menu</p></a></li>
+            <li><a href="#"><i class="fa-solid fa-clipboard-check"></i><p>Dashboard</p></a></li>
+            <li><a href="{% url 'ventas' %}"><i class="fa-solid fa-comments-dollar"></i><p>Ventas</p></a></li>
+            <li><a href="{% url 'inventario' %}"><i class="fa-solid fa-warehouse"></i><p>Inventario</p></a></li>
+            <li><a href="{% url 'analisis' %}"><i class="fa-solid fa-chart-line"></i><p>Analisis</p></a></li>
+            <li><a href="#"><i class="fa-solid fa-book"></i><p>Historial</p></a></li>
+            <li><a href="#"><i class="fa-solid fa-users"></i><p>Usuarios</p></a></li>
+            <li><a href="{% url 'cerrarSesion' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i><p>Cerrar Sesión</p></a></li>
+            <div class="active"></div>
+        </ul>
+    </div>
+
+    <div class="dashboard">
+        <div class="resumen-dashboard">
+            <div class="res-informacion"><!-- Ventas Activas -->
+                <div class="res-valor"><h3>76</h3></div>
+                <div class="res-icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                <div class="res-desc"><p>Ventas activas</p></div>
+            </div>
+            <div class="res-informacion"><!-- Ventas en proceso de confirmación -->
+                <div class="res-valor"><h3>76</h3></div>
+                <div class="res-icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                <div class="res-desc"><p>Ventas por confirmar</p></div>
+            </div>
+            <div class="res-informacion"><!-- Ventas atrasadas en pago -->
+                <div class="res-valor"><h3>76</h3></div>
+                <div class="res-icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                <div class="res-desc"><p>Ventas atrasadas</p></div>
+            </div>
+            <div class="res-informacion"><!-- Cantidad de productos con bajo stock -->
+                <div class="res-valor"><h3>76</h3></div>
+                <div class="res-icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                <div class="res-desc"><p>Productos con bajo stock</p></div>
+            </div>
+        </div>
+        <div class="ventas-dashboard">
+            <table>
+                <tr>
+                    {% for key in keys %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+                {% for venta in ventas %}
+                <tr>
+                    {% for value in venta %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="inventario-dashboard"></div>
+        <div class="analisis-dashboard"></div>
+    </div>
+
+<!-- 
+    <div class="navbar">
+        <div class="menu-toggle" id="menuToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="menu" id="menu">
+            <li><a href="#">Ventas</a></li>
+            <li><a href="#">Inventario</a></li>
+            <li><a href="#">Analisis</a></li>
+            <li><a href="#">Historial</a></li>
+            <li><a href="{% url 'cerrarSesion' %}">Cerrar Sesión</a></li>
+        </ul>
+        <ul class="cerrar">
+            <li><a href="#">Ayuda</a></li>
+            <li><a href="{% url 'cerrarSesion' %}">Cerrar Sesión</a></li>
+        </ul>
+    </div>
+
+    <div class="button-container">
+        <div class="card">
+            <h2>Ventas</h2>
+            <i class="fa-solid fa-cash-register fa-2xl"></i>
+            <p>Gestiona tus ventas</p>
+            <a class="botonMenu" href="http://127.0.0.1:8000/ventas">Ingresar</a>
+        </div>
+        <div class="card">
+            <h2>Inventario</h2>
+            <i class="fa-brands fa-microsoft fa-2xl"></i>
+            <p>Administra tu inventario</p>
+            <button class="botonMenu">Ingresar</button>
+        </div>
+        <div class="card">
+            <h2>Analisis</h2>
+            <i class="fa-solid fa-signal fa-2xl"></i>
+            <p>Realiza analisis de tus ventas</p>
+            <button class="botonMenu">Ingresar</button>
+        </div>
+        <div class="card">
+            <h2>Historial</h2>
+            <i class="fa-regular fa-calendar fa-2xl"></i>
+            <p>Revisa el historial de las ventas</p>
+            <button class="botonMenu">Ingresar</button>
+        </div>
+    </div>
+-->
+</body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/34751aa570.js" crossorigin="anonymous"></script>
+<script src="{% static 'scripts/menu-lateral.js' %}"></script>
+</html>

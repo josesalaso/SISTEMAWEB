@@ -1,0 +1,100 @@
+{% extends "VentaseInventario/inventario.html" %}
+{% load static %}
+
+{% block titulo %}Inventario{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'styles/inventario.css' %}?{% now 'U' %}">
+<style>
+    .modificar-button {
+    background-color: var(--color-terciario);
+    color: var(--color-primario);
+    border: none;
+    width: 100%;
+    height: 100%;
+    }
+    .eliminar-button {
+        color: var(--color-primario);
+        border: none;
+        width: 100%;
+        height: 100%;
+    }
+    .custom-alert{
+        font-size: 20px; 
+    }
+</style>
+</style>
+{% endblock %}
+
+{% block header %}
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="custom-alert alert alert-danger" role="alert"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+<div class="titulo-inventario">
+    <h1>Proveedores</h1>
+</div>
+<div class="buscador-inventario">
+    <input type="text" id="searchInput" class="searchInput" placeholder="Buscar...">
+</div>
+{% endblock %}
+
+{% block tabla %}
+<div class="divTabla">
+    <table id="dataTable" class="white-background">
+        <tr>
+            <th>Rut proveedor</th>
+            <th>DV proveedor</th>
+            <th>Nombre Proveedor</th>
+            <th>Modificar</th>
+            <th>Eliminar</th>     
+        </tr>
+        {% for pro in proveedor %}
+        <tr>
+            <td style="text-align: right;">{{ pro.id }}</td>
+            <td style="text-align: right;">{{ pro.dvProveedor }}</td>
+            <td>{{ pro.nombreProveedor }}</td>
+            <td>
+                <form method="post" action="{% url 'editarProveedor' %}">
+                    {% csrf_token %}
+                    <input type="text" value="{{ pro.id }}"  name="proveedor_id" style="display: none;">
+                    <a href="{% url 'editarProveedor' %}?proveedor_id={{ pro.id }}" class="btn btn-success modificar-button">Modificar</a>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'eliminar_proveedor' pro.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-danger eliminar-button" onclick="return confirmarEliminacion('{{ pro.id }}')">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+
+{% block botones %}
+{% if role == 'admin' or role == 'inventario' or role == 'ventasInventario' %}
+    <button class="boton-venta-mod"><a id="abrirVentana4" style="text-decoration: none;" href="#">Agregar Proveedor</a></button>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+<script>
+    function confirmarEliminacion(productoId) {
+        return confirm("¿Estás seguro de que deseas eliminar esta venta?");
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        const abrirVentanaButton1 = document.getElementById("abrirVentana4");
+    
+        abrirVentanaButton1.addEventListener("click", function () {
+            const anchoPantalla = window.screen.width;
+            const alturaPantalla = window.screen.height;
+            const ventanaEmergente1 = window.open("http://127.0.0.1:8000/agregarProveedor", "MiniVentana", `width=${anchoPantalla},height=${alturaPantalla}`);
+            ventanaEmergente1.document.close();
+        });
+    });
+</script>
+{% endblock %}

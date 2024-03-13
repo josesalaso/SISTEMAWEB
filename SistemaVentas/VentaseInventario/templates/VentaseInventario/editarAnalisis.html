@@ -1,0 +1,215 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Análisis</title>
+
+    <!-- Agrega Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+         :root {
+            --color-primario: #363062;
+            --color-secundario: #4D4C7D;
+            --color-terciario: #F99417;
+            --color-cuartario: #F5F5F5;
+        }
+        /* Estilo para el fondo negro */
+        
+        body {
+            background-color: var(--color-primario);
+            color: var(--color-cuartario);
+            display: grid;
+            grid-template-rows: 96%;
+            grid-template-columns: 74% 25%;
+            min-height: 100vh;
+            margin: 1%;
+            gap: 1%;
+            overflow: hidden;
+        }
+        /* Estilo para el título */
+        
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        /* Estilo para el formulario */
+        
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Estilo para los campos del formulario */
+        
+        .form-group {
+            margin-bottom: 10px;
+        }
+        
+        .form-control {
+            background-color: var(--color-primario);
+            color: var(--color-cuartario);
+            border: 1px solid var(--color-terciario);
+        }
+        /* Estilo para los botones */
+        
+        .btn {
+            margin-right: 10px;
+        }
+        
+        .graficoMuestra {
+            grid-row: 1;
+            grid-column: 1;
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .graficoMuestra img {
+            height: 100%;
+        }
+        
+        .opcionesGrafico {
+            grid-row: 1;
+            grid-column: 2;
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        label {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="graficoMuestra">
+        <img src="{% static analisis.imgAnalisis %}" alt="Grafico actual">
+    </div>
+    <div class="opcionesGrafico">
+        <!--
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{% if message.tags == 'success' %}alert alert-success{% elif message.tags == 'error' %}alert alert-danger{% endif %}">
+                {{ message }}
+            </li>
+            {% endfor %}
+        </ul>   
+        -->
+        <form method="post" class="product-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="graficoLabel">Gráfico:</label>
+                <select id="tipoGrafico" name="tipo_grafico" class="form-control" required>
+                    <option value="" disabled selected>Selecciona un gráfico</option>
+                    {% for opcion in opciones_graficos %}
+                        {% if analisis.tipoGrafico == opcion.grafico %}
+                            <option value="{{ opcion.grafico }}" selected>{{ opcion.grafico }}</option>
+                        {% else %}
+                            <option value="{{ opcion.grafico }}">{{ opcion.grafico }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tablaLabel">Tabla:</label>
+                <select id="tabla" name="tabla" class="form-control" required>
+                    <option value="" disabled selected>Tabla</option>
+                    {% for tabla in tablas.0 %}
+                        {% if analisis.tabla == tabla %}
+                            <option value="{{ tabla }}" selected>{{ tabla }}</option>
+                        {% else %}
+                            <option value="{{ tabla }}">{{ tabla }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="variablexLabel">Variable x:</label>
+                <select id="variablex" name="variablex" class="form-control" required><option value="">Variable x</option></select>
+            </div>
+            <div class="form-group">
+                <label for="variableyLabel">Variable y:</label>
+                <select id="variabley" name="variabley" class="form-control" required><option value="">Variable y</option></select>
+            </div>
+            <div class="form-group">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" value="{{ analisis.titulo }}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="labelX">Label X:</label>
+                <input type="text" id="labelX" name="label_x" value="{{ analisis.labelX }}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="labelY">Label Y:</label>
+                <input type="text" id="labelY" name="label_y" value="{{ analisis.labelY }}" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Crear analisis</button>
+        </form>
+    </div>
+    <script>
+        var tipoTabla = document.getElementById("tabla");
+        var dropdownx = document.getElementById('variablex');
+        var dropdowny = document.getElementById('variabley');
+        var dataFromView = JSON.parse('{{ tablas_json|safe }}');
+
+        function actualizarDropdown() {
+            var tipoTablaValue = tipoTabla.value;
+            var index = dataFromView[0].indexOf(tipoTablaValue);
+
+            dropdownx.innerHTML = '';
+            dropdowny.innerHTML = '';
+
+            if (index !== -1) {
+                var columnas = dataFromView[index + 1];
+
+                columnas.forEach(function(variable) {
+                    var option = document.createElement('option');
+                    option.value = variable;
+                    option.text = variable;
+                    dropdownx.appendChild(option);
+                });
+
+                columnas.forEach(function(variable) {
+                    var option = document.createElement('option');
+                    option.value = variable;
+                    option.text = variable;
+                    dropdowny.appendChild(option);
+                });
+            }
+        }
+
+        tipoTabla.addEventListener('change', actualizarDropdown);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %} {% for m in messages %}
+    <script>
+        swal.fire({
+            "title": "HECHO",
+            "text": "{{m}}",
+            "icon": "success"
+        })
+    </script>
+    {% endfor %} {% endif %}
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% if messages %} {% for m in messages %}
+<script>
+    swal.fire({
+        "title": "HECHO",
+        "text": "{{m}}",
+        "icon": "success"
+    })
+</script>
+{% endfor %} {% endif %}
+
+
+</html>

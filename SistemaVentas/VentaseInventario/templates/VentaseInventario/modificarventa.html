@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        :root {
+            --color-primario: #363062;
+            --color-secundario: #4D4C7D;
+            --color-terciario: #F99417;
+            --color-cuartario: #F5F5F5;
+        }
+        body {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+        }
+        .container {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--color-cuartario);
+            color: var(--color-primario);
+        }
+        th, td {
+            border: 1px solid var(--color-primario);
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: var(--color-primario);
+            color: var(--color-cuartario);
+        }
+        .button-container {
+            display: flex;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .modificar-button {
+            background-color: var(--color-terciario);
+            color: var(--color-primario);
+            border: none;
+        }
+        .seleccionar-checkbox {
+            margin: 0;
+        }
+        .button:hover{
+            background-color: var(--color-cuartario);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Rut Cliente</th>
+                    <th>ID Usuario</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Estado</th>
+                    <th>Pago</th>
+                    <th>Total</th>
+                    <th>ID</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="inventory-table-body">
+                {% for sale in ventas %}
+                <tr>
+                    <td>{{ sale.rutCliente }}</td>
+                    <td>{{ sale.idUsuario   }}</td>
+                    <td>{{ sale.fechaInicio }}</td>
+                    <td>{{ sale.fechaFin }}</td>
+                    <td>{{ sale.estado }}</td>
+                    <td>{{ sale.tipoPago }}</td>
+                    <td>{{ sale.total }}</td>
+                    <td>{{ sale.id }}</td>
+                    <td>
+                        <form method="post" action="{% url 'editarVenta' %}">
+                            {% csrf_token %}
+                            <input type="number" value="{{ sale.id }}"  name="venta_id" style="display: none;">
+                            <a href="{% url 'editarVenta' %}?venta_id={{ sale.id }}" class="btn btn-success modificar-button">Modificar</a>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url 'eliminar_venta' sale.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-danger" onclick="return confirmarEliminacion('{{ sale.id }}')">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    function confirmarEliminacion(productoId) {
+        return confirm("¿Estás seguro de que deseas eliminar esta venta?");
+    }
+</script>
+</html>

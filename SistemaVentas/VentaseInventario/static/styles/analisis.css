@@ -1,0 +1,178 @@
+:root {
+    --color-primario: #363062;
+    --color-secundario: #4D4C7D;
+    --color-terciario: #F99417;
+    --color-cuartario: #F5F5F5;
+}
+
+.ventana-analisis {
+    width: 100%;
+    min-height: 100vh;
+    max-height: 100vh;
+    background-color: var(--color-secundario);
+    display: grid;
+    grid-template-rows: 20% 70% 10%;
+}
+
+.header-analisis {
+    grid-row: 1;
+    background-color: var( --color-primario);
+    height: 100%;
+    width: 100%;
+    padding-top: .5%;
+}
+
+.titulo-analisis {
+    width: 100%;
+    height: 30%;
+}
+
+.titulo-analisis h1 {
+    text-align: center;
+    color: var(--color-cuartario);
+}
+
+.buscador-analisis {
+    width: 100%;
+    height: 30%;
+}
+
+.buscador-analisis input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+    margin-left: 10%;
+    border: 1px solid var(--color-terciario);
+}
+  
+.buscador-analisis .searchInput, .filterSelect {
+    padding: 8px; 
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border: 1px solid var(--color-terciario);
+}
+
+.filtro-analisis {
+    width: 100%;
+    height: 30%;
+    padding-left: 10%;
+}
+
+.filtro-analisis label {
+    font-size: 16px;
+    color: var(--color-cuartario);
+}
+
+.tabla-analisis {
+    grid-row: 2;
+    background-color: var(--color-secundario);
+    height: 100%;
+    width: 100%;
+    padding: 1%;
+    overflow: auto;
+}
+
+.tabla-analisis table {
+    background-color: var(--color-cuartario);
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 20px;
+    overflow: auto;
+    /* TODO: Llenar tabla y ver si funciona el scroll */
+}
+  
+.tabla-analisis table, th, td {
+    border: 1px solid #ccc;
+}
+  
+.tabla-analisis th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.tabla-analisis img {
+    width: 125px;
+}
+
+.botones-analisis {
+    grid-row: 3;
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-primario);
+    padding: 1%;
+}
+
+.boton-venta {
+    background-color: var(--color-terciario);
+    border-radius: 10px;
+    width: 20%;
+    height: 100%;
+    font-size: 20px;
+    border: 1px solid var(--color-primario);
+    align-items: center;
+    padding-top: .5%;
+}
+
+.boton-venta a {
+    display: block;
+    text-decoration: none;
+    color: var(--color-primario);
+    width: 100%;
+    height: 100%;
+}
+
+.boton-venta:hover {
+    background-color: var(--color-cuartario);
+}
+
+.boton-venta:hover a {
+    color: var(--color-primario);
+}
+  
+.boton-venta:nth-child(2) {
+    float: right;
+}
+
+.divTabla {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-cuartario);
+    border-radius: 15px;
+    padding: 1.5vh;
+    overflow: auto;
+}
+
+.divTabla table, th, td {
+    border: 1px solid var(--color-terciario);
+}
+
+.divTabla th {
+    padding: 10px;
+    background-color: var(--color-primario);
+    color: var(--color-cuartario);
+}
+
+.divTabla td {
+    padding: 6px;
+}
+.imagen-ampliada {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.imagen-ampliada img {
+    max-width: 90%;
+    max-height: 90%;
+    border: 3px solid #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}

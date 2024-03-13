@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles/template.css' %}?{% now 'U' %}">
+    {% block style %}{% endblock %}
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"  rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="dist/css/poncho.min.css" rel="stylesheet">
+    <link href="dist/css/icono-arg.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-refreferrer" /> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="menu-lateral" id="menu-lateral">
+        <a href="#" class="logo"><img src="{% static 'img/logo.PNG' %}" class="logo-img"></a>
+        <button id="menu-toggle" class="expand-collapse"><a href="#"><i class="fa-solid fa-bars"></i><p>Menu</p></a></button>
+        <button><a href="{% url 'dashboard' %}"><i class="fa-solid fa-clipboard-check"></i><p>Dashboard</p></a></button>
+        <button><a href="{% url 'ventas' %}"><i class="fa-solid fa-comments-dollar"></i><p>Ventas</p></a></button>
+        <button><a href="{% url 'productos' %}"><i class="fa-solid fa-warehouse"></i><p>Inventario</p></a></button>
+        <button><a href="{% url 'analisis' %}"><i class="fa-solid fa-chart-line"></i><p>Análisis</p></a></button>
+        <button><a href="{% url 'historial' %}"><i class="fa-solid fa-book"></i><p>Historial</p></a></button>
+            {% if role == "admin" %}
+                <button><a href="{% url 'usuario' %}"><i class="fa-solid fa-users"></i><p>Usuarios</p></a></button>
+            {% endif %}
+        <button><a href="{% url 'cerrarSesion' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i><p>Cerrar Sesión</p></a></button>
+        <!--
+        
+        <ul class="navegacion" id="navegacion">
+            <li id="menu-toggle" class="expand-collapse"><a href="#"><i class="fa-solid fa-bars"></i><p>Menu</p></a></li>
+            <li><button><a href="{% url 'dashboard' %}"><i class="fa-solid fa-clipboard-check"></i><p>Dashboard</p></a></button></li>
+            <li><a href="{% url 'ventas' %}"><i class="fa-solid fa-comments-dollar"></i><p>Ventas</p></a></li>
+            <li><a href="{% url 'productos' %}"><i class="fa-solid fa-warehouse"></i><p>Inventario</p></a></li>
+            <li><a href="{% url 'analisis' %}"><i class="fa-solid fa-chart-line"></i><p>Análisis</p></a></li>
+            <li><a href="{% url 'historial' %}"><i class="fa-solid fa-book"></i><p>Historial</p></a></li>
+            {% if role == "admin" %}
+                <li><a href="{% url 'usuario' %}"><i class="fa-solid fa-users"></i><p>Usuarios</p></a></li>
+            {% endif %}
+            <li><a href="{% url 'cerrarSesion' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i><p>Cerrar Sesión</p></a></li>
+        </ul>
+        -->
+    </div>
+
+    <div class="main-body">
+        {% block body %}{% endblock %}
+    </div>
+
+</body>
+<footer>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/34751aa570.js" crossorigin="anonymous"></script>
+    <script src="{% static 'scripts/menu-lateral.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+    <script>    
+        function mostrarLog1() {
+            const baseUrl = "{% static '' %}";
+            const opcionesGraficos1 = document.getElementById("opcionesGraficos1");
+            const imgSeleccionada1 = document.getElementById("imgSeleccionada1");
+            const selectedValue = opcionesGraficos1.value;
+            const imageUrl = baseUrl + selectedValue + '';
+            imgSeleccionada1.src = imageUrl;
+        };
+
+        function mostrarLog2() {
+            const baseUrl = "{% static '' %}";
+            const opcionesGraficos1 = document.getElementById("opcionesGraficos2");
+            const imgSeleccionada1 = document.getElementById("imgSeleccionada2");
+            const selectedValue = opcionesGraficos1.value;
+            const imageUrl = baseUrl + selectedValue + '';
+            imgSeleccionada1.src = imageUrl;
+        };
+
+        function mostrarLog3() {
+            const baseUrl = "{% static '' %}";
+            const opcionesGraficos1 = document.getElementById("opcionesGraficos3");
+            const imgSeleccionada1 = document.getElementById("imgSeleccionada3");
+            const selectedValue = opcionesGraficos1.value;
+            const imageUrl = baseUrl + selectedValue + '';
+            imgSeleccionada1.src = imageUrl;
+        };
+    </script>
+</footer>
+</html>

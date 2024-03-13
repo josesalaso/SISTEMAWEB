@@ -1,0 +1,173 @@
+.logo {
+    grid-row: 1;
+}
+
+.logo img {
+    width: 90%;
+    height: 100%;
+    object-fit: contain;
+}
+
+body {
+    background-color: #f8f9fa;
+    /* Fondo general */
+}
+
+header,
+footer {
+    background-color: #e9ecef;
+    /* Fondo de header y footer */
+    padding: 20px 0;
+}
+
+header {
+    background-color: #ffffff; /* Establece el color de fondo a blanco */
+}
+
+
+#cajas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Distribuye el espacio de manera uniforme */
+    align-items: stretch; /* Estira los elementos para que tengan la misma altura */
+}
+
+.card {
+    flex: 1 1 calc(50% - 20px); /* Permite que las cartas crezcan y se encogjan pero con una base de cálculo ajustada */
+    margin: 10px; /* Asegura un pequeño margen entre las cartas */
+    box-sizing: border-box; /* Incluye el padding y border en el cálculo del ancho de la caja */
+}
+
+.card img {
+    width: 100%; /* Asegura que la imagen cubra el ancho completo de la carta */
+    height: 200px; /* Establece una altura fija para todas las imágenes */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio asignado sin perder proporciones, cortando lo que sobre */
+}
+
+
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 100%; /* Permite que las cartas ocupen el 100% del ancho en pantallas pequeñas */
+        margin: 10px;
+    }
+}
+
+
+
+/* Centra el texto "Servicios JOSATEL" y añade margen para separarlo del carrusel */
+h1 {
+    text-align: center;
+    margin: 40px 0;
+}
+
+/* Ajustes para el carrusel para evitar que toque los bordes */
+.carousel {
+    margin: 0 auto;
+    /* Centra el carrusel */
+    max-width: 95%;
+    /* Limita el ancho del carrusel para evitar que toque los bordes */
+}
+
+/* Ajusta la altura del carrusel y mantiene la proporción de las imágenes */
+.carousel .carousel-item img {
+    width: 100%; /* Asegura que la imagen se adapte al ancho del carrusel */
+    height: 400px; /* Establece una altura fija más pequeña para todas las imágenes */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio disponible sin perder sus proporciones */
+}
+
+
+footer {
+    background-color: #f8f9fa;
+    /* Fondo del footer */
+    color: #212529;
+    /* Color de texto */
+    padding: 20px 0;
+}
+
+.navbar-nav .nav-link {
+    font-size: 20px; /* Aumenta el tamaño de la fuente. Ajusta este valor según prefieras */
+    font-weight: bold; /* Mantiene el texto más grueso */
+    margin-right: 20px; /* Añade margen a la derecha de cada enlace para separarlos. Ajusta según necesites */
+}
+.seccion-informativa {
+    text-align: center; /* Centra el texto de las listas */
+    font-size: 18px; /* Aumenta el tamaño de la fuente */
+    margin: 0 auto; /* Centra los contenedores si no ocupan todo el ancho */
+    max-width: 80%; /* Ajusta esto según prefieras */
+}
+
+.seccion-informativa h2 {
+    margin-top: 20px; /* Añade espacio arriba del título de la sección para separar de contenido anterior */
+}
+
+.seccion-informativa ul {
+    list-style-position: inside; /* Mueve los puntos de la lista hacia adentro, para alinear con el texto centrado */
+    text-align: left; /* Alinea el texto de la lista a la izquierda, pero dentro de un contenedor centrado */
+    display: inline-block; /* Hace que el bloque de la lista se centre correctamente dentro de .seccion-informativa */
+    margin: 0 auto; /* Centra la lista */
+}
+
+.seccion-informativa ul {
+    list-style-type: circle; /* Cambia el estilo de los puntos a círculos */
+    /* Para usar iconos personalizados: list-style-image: url('icono.png'); */
+}
+.whatsapp-link {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #25D366; /* Color de fondo de WhatsApp */
+    border-radius: 30px; /* Bordes redondeados para el botón */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* Sombra para mejor visibilidad */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    font-size: 16px; /* Ajusta esto para el tamaño del texto */
+    color: white; /* Color del texto */
+}
+
+.whatsapp-icon {
+    width: 30px; /* Tamaño del icono */
+    height: auto;
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+}
+
+/* Nuevo estilo para el mensaje "Cotizar!" */
+.whatsapp-message {
+    display: inline-block; /* Hace que el mensaje se muestre en línea con el icono */
+    font-weight: bold; /* Texto en negrita */
+}
+
+#apiwsp {
+    text-align: center; /* Centra el contenido del contenedor */
+    margin: 0 auto; /* Centra el contenedor si tiene un ancho definido */
+    padding: 20px; /* Añade algo de espacio alrededor para evitar que el texto toque los bordes */
+}
+footer#footerprincipal {
+    background-color: #ced4da; /* Un gris un poco más oscuro para el fondo */
+    color: #212529; /* Asegurándonos de que el texto tenga suficiente contraste */
+    padding: 40px 20px; /* Aumentamos el padding para dar más espacio */
+    text-align: center; /* Centramos el texto para una mejor presentación */
+}
+
+footer#footerprincipal ul {
+    padding: 0; /* Remueve el padding por defecto de las listas */
+    list-style-type: none; /* Elimina los marcadores de lista para una apariencia más limpia */
+    margin: 0 auto; /* Centra las listas en el footer */
+    display: inline-block; /* Permite que la lista se centre correctamente */
+    text-align: left; /* Alinea el texto de la lista a la izquierda, pero la lista en sí está centrada */
+}
+
+footer#footerprincipal ul li a {
+    color: #212529; /* Establece un color específico para los enlaces, si es necesario */
+    text-decoration: none; /* Opcional: elimina el subrayado de los enlaces */
+    font-size: 18px; /* Aumenta el tamaño de la fuente para mejorar la legibilidad */
+}
+
+footer#footerprincipal ul li {
+    margin-bottom: 10px; /* Añade un poco de espacio entre los elementos de la lista */
+}
+footer#footerprincipal, footer#footerprincipal a, footer#footerprincipal ul li {
+    font-weight: 500; /* Aplica un peso medio a la fuente para una negrita ligera */
+}

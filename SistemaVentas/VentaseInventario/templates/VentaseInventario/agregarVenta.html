@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Ventas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+         :root {
+            --color-primario: #363062;
+            --color-secundario: #4D4C7D;
+            --color-terciario: #F99417;
+            --color-cuartario: #F5F5F5;
+        }
+        
+        body {
+            display: grid;
+            min-height: 100vh;
+            width: 100%;
+            grid-template-rows: 2.5% 10% 87.5%;
+            grid-template-columns: 100%;
+            background-color: var(--color-secundario);
+        }
+        
+        .messages {
+            grid-row: 1;
+            grid-column: 1;
+            height: 100%;
+        }
+        
+        .titulo {
+            grid-row: 2;
+            grid-column: 1;
+            background-color: var(--color-primario);
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .formulario_grid {
+            grid-row: 3;
+            grid-column: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 12.5% 12.5% 12.5% 62.5%;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .estado {
+            grid-row: 1;
+            grid-column: span 2;
+            background-color: var(--color-secundario);
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .cliente {
+            grid-row: 2;
+            grid-column: span 2;
+            background-color: var(--color-secundario);
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .fecha_inicio {
+            grid-row: 1;
+            grid-column: 3/ span 2;
+            background-color: var(--color-secundario);
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .fecha_fin {
+            grid-row: 2;
+            grid-column: 3/ span 2;
+            background-color: var(--color-secundario);
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .tipo_pago {
+            grid-row: 3;
+            grid-column: 2/ span 2;
+            background-color: var(--color-secundario);
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .producto {
+            grid-row: 4;
+            grid-column: span 4;
+            display: grid;
+            grid-template-columns: 16.66% 16.66% 16.66% 16.66% 16.66% 16.66%;
+            grid-template-rows: 15.5% 15.5% 15.5% 15.5% 15.5% 15.5% 7%;
+            background-color: var(--color-primario);
+            color: var(--color-cuartario);
+        }
+        
+        .producto1 {
+            grid-row: 1;
+            grid-column: span 2;
+        }
+        
+        .producto2 {
+            grid-row: 2;
+            grid-column: span 2;
+        }
+        
+        .producto3 {
+            grid-row: 3;
+            grid-column: span 2;
+        }
+        
+        .producto4 {
+            grid-row: 4;
+            grid-column: span 2;
+        }
+        
+        .producto5 {
+            grid-row: 5;
+            grid-column: span 2;
+        }
+        
+        .cantidad1 {
+            grid-row: 1;
+            grid-column: 3;
+        }
+        
+        .cantidad2 {
+            grid-row: 2;
+            grid-column: 3;
+        }
+        
+        .cantidad3 {
+            grid-row: 3;
+            grid-column: 3;
+        }
+        
+        .cantidad4 {
+            grid-row: 4;
+            grid-column: 3;
+        }
+        
+        .cantidad5 {
+            grid-row: 5;
+            grid-column: 3;
+        }
+        
+        .descuento1 {
+            grid-row: 1;
+            grid-column: 4;
+        }
+        
+        .descuento2 {
+            grid-row: 2;
+            grid-column: 4;
+        }
+        
+        .descuento3 {
+            grid-row: 3;
+            grid-column: 4;
+        }
+        
+        .descuento4 {
+            grid-row: 4;
+            grid-column: 4;
+        }
+        
+        .descuento5 {
+            grid-row: 5;
+            grid-column: 4;
+        }
+        
+        .eliminar1 {
+            grid-column: 5;
+            grid-row: 1;
+        }
+        
+        .eliminar2 {
+            grid-column: 5;
+            grid-row: 2;
+        }
+        
+        .eliminar3 {
+            grid-column: 5;
+            grid-row: 3;
+        }
+        
+        .eliminar4 {
+            grid-column: 5;
+            grid-row: 4;
+        }
+        
+        .eliminar5 {
+            grid-column: 5;
+            grid-row: 5;
+        }
+        
+        .boton-eliminar {
+            width: 70%;
+            height: 50%;
+            margin-top: 3vh;
+            margin-left: 3vw;
+            margin-bottom: 0;
+            font-size: 130%;
+            border-radius: 10px;
+            color: var(--color-cuartario);
+        }
+        
+        .aceptar {
+            grid-column: 6;
+            width: 70%;
+            height: 50%;
+            margin-top: 3vh;
+            margin-left: 3vw;
+            margin-bottom: 0;
+            font-size: 130%;
+            border-radius: 10px;
+            color: var(--color-cuartario);
+        }
+        
+        .boton_agregar {
+            grid-row: 7;
+            grid-column: 3 /span 2;
+            color: var(--color-cuartario);
+            background-color: var(--color-terciario);
+        }
+        
+        .total {
+            grid-row: 6;
+            grid-column: 3 /span 2;
+            color: var(--color-secundario);
+            background-color: var(--color-secundario);
+            text-align: center;
+            font-size: 40px;
+        }
+        
+        input#total {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+            border: 0;
+            text-align: center;
+        }
+        
+        .calcular {
+            grid-row: 7;
+            grid-column: 5 /span 2;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .calcular button {
+            width: 100%;
+            height: 100%;
+            color: var(--color-primario);
+            background-color: var(--color-cuartario);
+        }
+        
+        .cancelar {
+            grid-row: 7;
+            grid-column: span 2;
+        }
+        
+        .cancelar button {
+            width: 100%;
+            height: 100%;
+            color: var(--color-primario);
+            background-color: var(--color-cuartario);
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{% if message.tags == 'success' %}alert alert-success{% elif message.tags == 'error' %}alert alert-danger{% endif %}">
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="titulo">
+        <h1>Agregar Venta</h1>
+    </div>
+    <form class="formulario_grid" method="post">
+        {% csrf_token %}
+        <div class="estado">
+            <label for="estado">Estado:</label>
+            <select class="form-control" id="estado" name="estado" required> 
+                <option value="" disabled selected>Seleccione un estado</option>
+                <option value="Completado">Completado</option>
+                <option value="Finalizado">Finalizado</option>
+                <option value="En Proceso">En Proceso</option>
+            </select>
+        </div>
+        <div class="cliente">
+            <label for="rutCliente">Cliente:</label>
+            <select class="form-control" id="rutCliente" name="rutCliente" required>
+                <option value="" disabled selected>Seleccione el cliente</option>
+                {% for cli in cliente %}
+                    <option value="{{ cli.rut }}">{{ cli.nombre }}: {{ cli.rut }}-{{ cli.dv }} </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="fecha_inicio">
+            <label for="fechainicio">Fecha inicio:</label>
+            <input type="date" class="form-control" id="fechainicio" name="fechainicio" required>
+        </div>
+        <div class="fecha_fin">
+            <label for="fechafin">Fecha fin:</label>
+            <input type="date" class="form-control" id="fechafin" name="fechafin" required>
+        </div>
+        <div class="tipo_pago">
+            <label for="pago">Tipo de pago:</label>
+            <select class="form-control" id="pago" name="pago" required>
+                <option value="" disabled selected>Seleccione un tipo de pago</option>
+                <option value="Debito">Débito</option>
+                <option value="Credito">Crédito</option>
+                <option value="Efectivo">Efectivo</option>
+            </select>
+        </div>
+        <div class="producto" id="nuevos-productos">
+            <button type="button" id="agregar-producto" class="boton_agregar" onclick="agregarProducto()">+</button>
+            <div class="total">
+                <input type="number" id="total" name="total" value="0" readonly>
+            </div>
+            <div class="calcular" id="calcular">
+                <button type="submit" id="agregar-producto" class="btn btn-primary">Guardar</button>
+            </div>
+            <div class="cancelar" id="cancelar">
+                <button type="button" class="btn btn-danger">Cancelar</button>
+            </div>
+        </div>
+    </form>
+    </div>
+    <script>
+        document.getElementById('cancelar').addEventListener('click', function() {
+            window.close();
+        });
+
+        var cont = 0;
+        var maxProductos = 5;
+        var agregarOtroBoton;
+        var productosSeleccionados = new Set();
+
+        function agregarProducto() {
+            if (cont < maxProductos) {
+                cont++;
+
+                var nuevoProducto = document.createElement('div');
+                nuevoProducto.className = 'producto' + cont;
+                nuevoProducto.innerHTML = `
+                <label for="idProducto">Productos:</label>
+                <select class="form-control producto-select" id="idProducto${cont}" name="idProducto${cont}">
+                    <option value="" disabled selected>Seleccione productos</option>
+                    {% for prod in productos %}
+                        <option value="{{ prod.id }}" data-precio="{{ prod.precio }}" data-nombre="{{ prod.nombre }}">{{ prod.nombre }}: $ {{ prod.precio }} c/u</option>
+                    {% endfor %}
+                </select>
+            `;
+
+                var nuevoCantidad = document.createElement('div');
+                nuevoCantidad.className = 'cantidad' + cont;
+                nuevoCantidad.innerHTML = `
+                <label for="cantidad">Cantidad:</label>
+                <input class="form-control cantidad-input" type="number" id="cantidad${cont}" name="cantidad${cont}" placeholder="Cantidad">
+            `;
+
+                var nuevoDescuento = document.createElement('div');
+                nuevoDescuento.className = 'descuento' + cont;
+                nuevoDescuento.innerHTML = `
+                <label for="descuento">Descuento %:</label>
+                <input class="form-control descuento-input" type="number" id="descuento${cont}" name="descuento${cont}" placeholder="Descuento" value="0">
+            `;
+
+                var eliminarProd = document.createElement('div');
+                eliminarProd.className = 'eliminar' + cont;
+                eliminarProd.innerHTML = `
+                <button type="button" onclick="eliminarProducto(${cont})" id="eliminar${cont}" class="btn btn-danger boton-eliminar">Eliminar</button>
+            `;
+
+                document.getElementById('nuevos-productos').appendChild(nuevoProducto);
+                document.getElementById('nuevos-productos').appendChild(nuevoCantidad);
+                document.getElementById('nuevos-productos').appendChild(nuevoDescuento);
+                document.getElementById('nuevos-productos').appendChild(eliminarProd);
+                document.getElementById('agregar-producto').disabled = true;
+                if (!agregarOtroBoton) {
+                    agregarOtroBoton = document.createElement('button');
+                    agregarOtroBoton.type = 'button';
+                    agregarOtroBoton.id = 'agregar-otro-producto';
+                    agregarOtroBoton.className = 'btn btn-success aceptar';
+                    agregarOtroBoton.innerHTML = 'Aceptar';
+                    agregarOtroBoton.addEventListener('click', function() {
+                        document.getElementById('agregar-producto').disabled = false;
+                    });
+
+                    document.getElementById('nuevos-productos').appendChild(agregarOtroBoton);
+                }
+
+                nuevoCantidad.addEventListener('input', function() {
+                    calcularTotal();
+                });
+
+                nuevoDescuento.addEventListener('input', function() {
+                    calcularTotal();
+                });
+            } else {
+                alert('No se pueden agregar más productos');
+                document.getElementById('agregar-producto').disabled = true;
+            }
+        }
+
+        function deshabilitarOpcionesSeleccionadas() {
+            // Obtener todas las opciones seleccionadas en los productos existentes
+            var opcionesSeleccionadas = new Set();
+
+            for (var i = 1; i <= cont; i++) {
+                var idProducto = document.getElementById('idProducto' + i);
+                var seleccionado = idProducto.value;
+
+                if (seleccionado !== '') {
+                    opcionesSeleccionadas.add(seleccionado);
+                }
+            }
+
+            // Copiar el conjunto para evitar modificarlo mientras se utiliza
+            var copiaOpcionesSeleccionadas = new Set(opcionesSeleccionadas);
+
+            // Eliminar las opciones seleccionadas del conjunto productosSeleccionados
+            copiaOpcionesSeleccionadas.forEach(function(seleccionado) {
+                productosSeleccionados.delete(seleccionado);
+            });
+
+            // Iterar sobre todas las opciones en los productos restantes y deshabilitar las ya seleccionadas
+            for (var i = 1; i <= cont; i++) {
+                var idProducto = document.getElementById('idProducto' + i);
+
+                idProducto.querySelectorAll('option').forEach(function(option) {
+                    if (option.value !== '' && copiaOpcionesSeleccionadas.has(option.value)) {
+                        option.setAttribute('disabled', 'disabled');
+                    } else {
+                        option.removeAttribute('disabled');
+                    }
+                });
+            }
+        }
+
+        function eliminarProducto(numeroProducto) {
+            var elementoProducto = document.querySelector('.producto' + numeroProducto);
+            if (elementoProducto) {
+                elementoProducto.remove();
+                cont--;
+
+                var elementoCantidad = document.querySelector('.cantidad' + numeroProducto);
+                var elementoDescuento = document.querySelector('.descuento' + numeroProducto);
+                var elementoBotonEliminar = document.querySelector('.eliminar' + numeroProducto);
+
+                if (elementoCantidad) {
+                    elementoCantidad.remove();
+                }
+
+                if (elementoDescuento) {
+                    elementoDescuento.remove();
+                }
+
+                if (elementoBotonEliminar) {
+                    elementoBotonEliminar.remove();
+                }
+                if (cont === 0 && agregarOtroBoton) {
+                    agregarOtroBoton.remove();
+                    agregarOtroBoton = null;
+                }
+
+                deshabilitarOpcionesSeleccionadas();
+                calcularTotal();
+                document.getElementById('agregar-producto').disabled = false;
+            }
+        }
+
+        function calcularTotal() {
+            var total = 0;
+
+            for (var i = 1; i <= cont; i++) {
+                var idProducto = document.getElementById('idProducto' + i);
+                var cantidad = document.getElementById('cantidad' + i);
+                var descuento = document.getElementById('descuento' + i);
+                var precio = parseFloat(idProducto.options[idProducto.selectedIndex].getAttribute('data-precio'));
+                var cantidadValue = parseFloat(cantidad.value) || 0;
+                var descuentoValue = parseFloat(descuento.value) || 0;
+                total += precio * cantidadValue * (1 - descuentoValue / 100);
+            }
+
+            document.getElementById('total').value = total.toFixed(2);
+        }
+    </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% if messages %} {% for m in messages %}
+<script>
+    swal.fire({
+        "title": "HECHO",
+        "text": "{{m}}",
+        "icon": "success"
+    })
+</script>
+{% endfor %} {% endif %}
+
+</html>

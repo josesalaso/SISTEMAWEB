@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Ventas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+         :root {
+            --color-primario: #363062;
+            --color-secundario: #4D4C7D;
+            --color-terciario: #F99417;
+            --color-cuartario: #F5F5F5;
+        }
+        
+        body {
+            display: grid;
+            min-height: 100vh;
+            width: 100%;
+            grid-template-rows: 2.5% 10% 87.5%;
+            grid-template-columns: 100%;
+            background-color: var(--color-secundario);
+        }
+        
+        .messages {
+            grid-row: 1;
+            grid-column: 1;
+            height: 100%;
+        }
+        
+        .titulo {
+            grid-row: 2;
+            grid-column: 1;
+            background-color: var(--color-primario);
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .formulario_grid {
+            grid-row: 3;
+            grid-column: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 12.5% 12.5% 12.5% 62.5%;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .estado {
+            grid-row: 1;
+            grid-column: span 2;
+            background-color: var(--color-secundario);
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .cliente {
+            grid-row: 2;
+            grid-column: span 2;
+            background-color: var(--color-secundario);
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .fecha_inicio {
+            grid-row: 1;
+            grid-column: 3/ span 2;
+            background-color: var(--color-secundario);
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .fecha_fin {
+            grid-row: 2;
+            grid-column: 3/ span 2;
+            background-color: var(--color-secundario);
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .tipo_pago {
+            grid-row: 3;
+            grid-column: 2/ span 2;
+            background-color: var(--color-secundario);
+            text-align: center;
+            color: var(--color-cuartario);
+        }
+        
+        .producto {
+            grid-row: 4;
+            grid-column: span 4;
+            display: grid;
+            grid-template-columns: 16.66% 16.66% 16.66% 16.66% 16.66% 16.66%;
+            grid-template-rows: 15.5% 15.5% 15.5% 15.5% 15.5% 15.5% 7%;
+            background-color: var(--color-primario);
+            color: var(--color-cuartario);
+        }
+        
+        .producto-column {
+            grid-row: 1;
+            grid-column: span 2;
+        }
+        
+        .producto1 {
+            grid-row: 1;
+            grid-column: span 2;
+        }
+        
+        .producto2 {
+            grid-row: 2;
+            grid-column: span 2;
+        }
+        
+        .producto3 {
+            grid-row: 3;
+            grid-column: span 2;
+        }
+        
+        .producto4 {
+            grid-row: 4;
+            grid-column: span 2;
+        }
+        
+        .producto5 {
+            grid-row: 5;
+            grid-column: span 2;
+        }
+        
+        .cantidad1 {
+            grid-row: 1;
+            grid-column: 3 /span 2;
+        }
+        
+        .cantidad2 {
+            grid-row: 2;
+            grid-column: 3 /span 2;
+        }
+        
+        .cantidad3 {
+            grid-row: 3;
+            grid-column: 3 /span 2;
+        }
+        
+        .cantidad4 {
+            grid-row: 4;
+            grid-column: 3 /span 2;
+        }
+        
+        .cantidad5 {
+            grid-row: 5;
+            grid-column: 3 /span 2;
+        }
+        
+        .descuento1 {
+            grid-row: 1;
+            grid-column: 5;
+        }
+        
+        .descuento2 {
+            grid-row: 2;
+            grid-column: 5;
+        }
+        
+        .descuento3 {
+            grid-row: 3;
+            grid-column: 5;
+        }
+        
+        .descuento4 {
+            grid-row: 4;
+            grid-column: 5;
+        }
+        
+        .descuento5 {
+            grid-row: 5;
+            grid-column: 5;
+        }
+        
+        .boton-eliminar {
+            margin-top: 10%;
+            margin-left: 10%;
+            height: 50%;
+            width: 50%;
+            font-size: 150%;
+            border-radius: 10px;
+            background-color: red;
+            color: var(--color-cuartario);
+        }
+        
+        .boton_agregar {
+            grid-row: 7;
+            grid-column: 3 /span 2;
+            color: var(--color-cuartario);
+            background-color: var(--color-terciario);
+        }
+        
+        .total {
+            grid-row: 6;
+            grid-column: 3 /span 2;
+            color: var(--color-secundario);
+            background-color: var(--color-secundario);
+            text-align: center;
+            font-size: 40px;
+        }
+        
+        input#total {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+            border: 0;
+            text-align: center;
+        }
+        
+        .calcular {
+            grid-row: 7;
+            grid-column: 5 /span 2;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .calcular button {
+            width: 100%;
+            height: 100%;
+            color: var(--color-primario);
+            background-color: var(--color-cuartario);
+        }
+        
+        .cancelar {
+            grid-row: 7;
+            grid-column: span 2;
+        }
+        
+        .cancelar button {
+            width: 100%;
+            height: 100%;
+            color: var(--color-primario);
+            background-color: var(--color-cuartario);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="titulo">
+        <h1>Editar Venta</h1>
+    </div>
+    <form class="formulario_grid" method="post">
+        {% csrf_token %}
+        <div class="estado">
+            <label for="estado">Estado:</label>
+            <select class="form-control" id="estado" name="estado">
+                <option value="" disabled selected>Seleccione un estado</option>
+                {% if venta.estado == 'Completado' %}
+                    <option value="Completado" selected>Completado</option>
+                    <option value="Finalizado" >Finalizado</option>
+                    <option value="En Proceso">En Proceso</option>
+                {% elif venta.estado == 'Finalizado' %}
+                    <option value="Completado">Completado</option>
+                    <option value="Finalizado" selected>Finalizado</option>
+                    <option value="En Proceso">En Proceso</option>
+                {% else %}
+                    <option value="Completado">Completado</option>
+                    <option value="Finalizado">Finalizado</option>
+                    <option value="En Proceso" selected>En Proceso</option>
+                {% endif %}
+            </select>
+        </div>
+        <div class="cliente">
+            <label for="rutCliente">Cliente:</label>
+            <select class="form-control" id="rutCliente" name="rutCliente">
+                <option value="" disabled>Seleccione el cliente</option>
+                {% for cli in cliente %}
+                    {% if cli.rut == venta.rutCliente %}
+                        <option value="{{ cli.rut }}" selected>{{ cli.nombre }}: {{ cli.rut }}-{{ cli.dv }}</option>
+                    {% else %}
+                        <option value="{{ cli.rut }}">{{ cli.nombre }}: {{ cli.rut }}-{{ cli.dv }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="fecha_inicio">
+            <label for="fechainicio">Fecha inicio:</label>
+            <input type="date" class="form-control" id="fechainicio" name="fechainicio" value="{{ venta.fechaInicio|date:'Y-m-d' }}">
+        </div>
+        <div class="fecha_fin">
+            <label for="fechafin">Fecha fin:</label>
+            <input type="date" class="form-control" id="fechafin" name="fechafin" value="{{ venta.fechaFin|date:'Y-m-d' }}">
+        </div>
+        <div class="tipo_pago">
+            <label for="pago">Tipo de pago:</label>
+            <select class="form-control" id="pago" name="pago">
+                <option value="" disabled>Seleccione un tipo de pago</option>
+                {% if venta.tipoPago == 'Debito' %}
+                    <option value="Debito" selected>Débito</option>
+                    <option value="Credito">Crédito</option>
+                    <option value="Efectivo">Efectivo</option>
+                {% elif venta.tipoPago == 'Credito' %}
+                    <option value="Debito">Débito</option>
+                    <option value="Credito" selected>Crédito</option>
+                    <option value="Efectivo">Efectivo</option>
+                {% else %}
+                    <option value="Debito">Débito</option>
+                    <option value="Credito">Crédito</option>
+                    <option value="Efectivo" selected>Efectivo</option>
+                {% endif %}
+            </select>
+        </div>
+        <div class="producto">
+            <div class="producto-column">
+                {% for i in detalle_venta %}
+                <div class="producto-item">
+                    <label for="idProducto{{ forloop.counter }}">Productos:</label>
+                    <select class="form-control producto-select" id="idProducto{{ forloop.counter }}" name="idProducto{{ forloop.counter }}" data-numero-producto="{{ forloop.counter }}">
+                        <option value="" disabled>Seleccione productos</option>
+                        {% for prod in productos %}
+                            <option value="{{ prod.id }}" data-precio="{{ prod.precio }}" data-nombre="{{ prod.nombre }}" {% if prod.id == i.idProducto %}selected{% endif %}>{{ prod.nombre }}: $ {{ prod.precio }} c/u</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="producto-column">
+                {% for i in detalle_venta %}
+                <div class="producto-item">
+                    <label for="cantidad{{ forloop.counter }}">Cantidad:</label>
+                    <input class="form-control cantidad-input" type="number" id="cantidad{{ forloop.counter }}" name="cantidad{{ forloop.counter }}" placeholder="Cantidad" value="{{ i.cantidad }}">
+                </div>
+                {% endfor %}
+            </div>
+            <div class="producto-column">
+                {% for i in detalle_venta %}
+                <div class="producto-item">
+                    <label for="descuento{{ forloop.counter }}">Descuento %:</label>
+                    <input class="form-control descuento-input" type="number" id="descuento{{ forloop.counter }}" name="descuento{{ forloop.counter }}" placeholder="Descuento" value="{{ i.porcentajeDesc }}">
+                </div>
+                <div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="total">
+                <input type="number" id="total" name="total" value="0" readonly>
+            </div>
+            <div class="calcular" id="calcular">
+                <button type="submit" id="calcular-button" class="btn btn-primary" data-cont="{{ detalle_venta|length }}">Guardar</button>
+            </div>
+            <div class="cancelar" id="cancelar">
+                <button type="button" class="btn btn-danger">Cancelar</button>
+            </div>
+        </div>
+    </form>
+    </div>
+    <script>
+        document.getElementById('cancelar').addEventListener('click', function() {
+            window.close();
+        });
+
+        function calcularTotal() {
+            var total = 0;
+
+            var productos = document.querySelectorAll('.producto-select');
+            var cantidades = document.querySelectorAll('.cantidad-input');
+            var descuentos = document.querySelectorAll('.descuento-input');
+
+            for (var i = 0; i < productos.length; i++) {
+                var idProducto = productos[i];
+                var cantidad = cantidades[i];
+                var descuento = descuentos[i];
+                var precio = parseFloat(idProducto.options[idProducto.selectedIndex].getAttribute('data-precio'));
+                var cantidadValue = parseFloat(cantidad.value) || 0;
+                var descuentoValue = parseFloat(descuento.value) || 0;
+                total += precio * cantidadValue * (1 - descuentoValue / 100);
+            }
+
+            document.getElementById('total').value = total.toFixed(2);
+        }
+
+        window.addEventListener('load', function() {
+            calcularTotal();
+        });
+
+        var productosExistentes = document.querySelectorAll('.producto-select');
+        productosExistentes.forEach(function(producto) {
+            producto.addEventListener('change', function() {
+                calcularTotal();
+            });
+        });
+
+        var cantidadesExistentes = document.querySelectorAll('.cantidad-input');
+        var descuentosExistentes = document.querySelectorAll('.descuento-input');
+
+        cantidadesExistentes.forEach(function(cantidad) {
+            cantidad.addEventListener('input', function() {
+                calcularTotal();
+            });
+        });
+
+        descuentosExistentes.forEach(function(descuento) {
+            descuento.addEventListener('input', function() {
+                calcularTotal();
+            });
+        });
+    </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% if messages %} {% for m in messages %}
+<script>
+    swal.fire({
+        "title": "HECHO",
+        "text": "{{m}}",
+        "icon": "success"
+    })
+</script>
+{% endfor %} {% endif %}
+
+</html>

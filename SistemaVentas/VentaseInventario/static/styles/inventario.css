@@ -1,0 +1,262 @@
+:root {
+    --color-primario: #363062;
+    --color-secundario: #4D4C7D;
+    --color-terciario: #F99417;
+    --color-cuartario: #F5F5F5;
+}
+
+.inventario-container {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 5% 20% 65% 10%;
+    height: 100vh;
+}
+
+.prodCliProv {
+    grid-row: 1;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+}
+
+.prodCliProv a {
+    text-decoration: none
+}
+
+.prodCliProv button {
+    font-size: 25px;
+}
+
+.botonProductos {
+    grid-column: 1;
+    background-color: var(--color-terciario);
+    height: 100%;
+    width: 100%;
+}
+
+.botonProductos:hover {
+    background-color: var(--color-cuartario);
+    color: var(--color-primario);
+}
+
+.botonProveedor {
+    grid-column: 2;
+    background-color: var(--color-terciario);
+    height: 100%;
+    width: 100%;
+}
+
+.botonProveedor:hover {
+    background-color: var(--color-cuartario);
+    color: var(--color-primario);
+}
+
+.botonCliente {
+    grid-column: 3;
+    background-color: var(--color-terciario);
+    height: 100%;
+    width: 100%;
+}
+
+.botonCliente:hover {
+    background-color: var(--color-cuartario);
+    color: var(--color-primario);
+}
+
+.header-inventario {
+    grid-row: 2;
+    background-color: var( --color-primario);
+    height: 100%;
+    width: 100%;
+    padding-top: .5%;
+}
+
+.titulo-inventario {
+    width: 100%;
+    height: 30%;
+}
+
+.titulo-inventario h1 {
+    text-align: center;
+    color: var(--color-cuartario);
+}
+
+.buscador-inventario {
+    width: 100%;
+    height: 30%;
+}
+
+.buscador-inventario input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+    margin-left: 10%;
+    border: 1px solid var(--color-terciario);
+}
+  
+.buscador-inventario .searchInput, .filterSelect {
+    padding: 8px; 
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border: 1px solid var(--color-terciario);
+}
+
+.filtro-inventario {
+    width: 100%;
+    height: 30%;
+    padding-left: 10%;
+}
+
+.filtro-inventario label {
+    font-size: 16px;
+    color: var(--color-cuartario);
+}
+
+.tabla-inventario {
+    grid-row: 3;
+    background-color: var(--color-secundario);
+    height: 100%;
+    width: 100%;
+    padding: 1%;
+    overflow: auto;
+}
+
+.tabla-inventario table {
+    background-color: var(--color-cuartario);
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 20px;
+    overflow: auto;
+    /* TODO: Llenar tabla y ver si funciona el scroll */
+}
+  
+.tabla-inventario table, th, td {
+    border: 1px solid #ccc;
+}
+  
+.tabla-inventario th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.botones-inventario {
+    grid-row: 4;
+    background-color: var(--color-primario);
+    height: 100%;
+    width: 100%;
+    padding: 1%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.boton-venta-mod {
+    background-color: var(--color-terciario);
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    border: 1px solid var(--color-primario);
+    align-items: center;
+    grid-column: 1;
+}
+
+.boton-venta-mod a {
+    display: block;
+    text-decoration: none;
+    color: var(--color-primario);
+    width: 100%;
+    height: 100%;
+}
+
+.boton-venta-mod:hover {
+    background-color: var(--color-cuartario);
+}
+
+.boton-venta-mod:hover a {
+    color: var(--color-primario);
+}
+
+.boton-venta-aler {
+    background-color: transparent;
+    border-radius: 10px;
+    width: 20%;
+    height: 100%;
+    font-size: 20px;
+    border: 1px solid var(--color-primario);
+    align-items: center;
+    text-align: center;
+    margin-left: 40%;
+    grid-column: 3;
+}
+.boton-venta-aler i {
+    color: var(--color-primario);
+    font-size: 300%;
+}
+
+.boton-venta-aler a {
+    display: block;
+    text-decoration: none;
+    color: var(--color-primario);
+    width: 100%;
+    height: 100%;
+}
+
+.boton-venta-aler:hover {
+    background-color: var(--color-primario);
+}
+
+.boton-venta-aler:hover a {
+    color: var(--color-primario);
+}
+
+.boton-venta-agr {
+    background-color: var(--color-terciario);
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    border: 1px solid var(--color-primario);
+    align-items: center;
+    grid-column: 5;
+}
+
+.boton-venta-agr a {
+    display: block;
+    text-decoration: none;
+    color: var(--color-primario);
+    width: 100%;
+    height: 100%;
+}
+
+.boton-venta-agr:hover {
+    background-color: var(--color-cuartario);
+}
+
+.boton-venta-agr:hover a {
+    color: var(--color-primario);
+}
+
+.divTabla {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-cuartario);
+    border-radius: 15px;
+    padding: 1.5vh;
+    overflow: auto;
+}
+
+.divTabla table, th, td {
+    border: 1px solid var(--color-terciario);
+}
+
+.divTabla th {
+    padding: 10px;
+    background-color: var(--color-primario);
+    color: var(--color-cuartario);
+}
+
+.divTabla td {
+    padding: 6px;
+}

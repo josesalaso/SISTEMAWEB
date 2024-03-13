@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load humanize %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        :root {
+            --color-primario: #363062;
+            --color-secundario: #4D4C7D;
+            --color-terciario: #F99417;
+            --color-cuartario: #F5F5F5;
+        }
+        body {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+        }
+        .container {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+            padding: 10px;
+            margin-left: 10%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--color-cuartario);
+            color: var(--color-primario);
+        }
+        th, td {
+            border: 1px solid var(--color-primario);
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: var(--color-primario);
+            color: var(--color-cuartario);
+        }
+        .button-container {
+            display: flex;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .modificar-button {
+            background-color: var(--color-terciario);
+            color: var(--color-primario);
+            border: none;
+        }
+        .seleccionar-checkbox {
+            margin: 0;
+        }
+        .button:hover{
+            background-color: var(--color-cuartario);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Rut Cliente</th>
+                    <th>ID Usuario</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Estado</th>
+                    <th>Pago</th>
+                    <th>Total (CLP)</th>
+                    <th>ID</th>
+                    <th>Producto 1</th>
+                    <th>Producto 2</th>
+                    <th>Producto 3</th>
+                    <th>Producto 4</th>
+                    <th>Producto 5</th>
+                </tr>
+            </thead>
+            <tbody id="inventory-table-body">
+                {% for bit in bitVentas %}
+                <tr>
+                    <td>{{ bit.rutCliente }}</td>
+                    <td>{{ bit.idUsuario }}</td>
+                    <td>{{ bit.fechaInicio }}</td>
+                    <td>{{ bit.fechaFin }}</td>
+                    <td>{{ bit.estado }}</td>
+                    <td>{{ bit.tipoPago }}</td>
+                    <td style="text-align: right;">{{ bit.total|floatformat:0|intcomma }}</td>
+                    <td style="text-align: center;">{{ bit.id }}</td>
+                    <td>{{ bit.prod1 }}</td>
+                    <td>{{ bit.prod2 }}</td>
+                    <td>{{ bit.prod3 }}</td>
+                    <td>{{ bit.prod4 }}</td>
+                    <td>{{ bit.prod5 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

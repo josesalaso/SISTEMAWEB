@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Cliente</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+         :root {
+            --color-primario: #363062;
+            --color-secundario: #4D4C7D;
+            --color-terciario: #F99417;
+            --color-cuartario: #F5F5F5;
+        }
+        
+        body {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            background-color: var(--color-primario);
+            color: var(--color-cuartario);
+            border: 1px solid var(--color-terciario);
+        }
+        
+        .btn {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{% if message.tags == 'success' %}alert alert-success{% elif message.tags == 'error' %}alert alert-danger{% endif %}">
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="container">
+        <h1>Editar Cliente</h1>
+        <form id="product-form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="rutCliente">Rut Proveedor:</label>
+                <input type="text" class="form-control" id="rutCliente" name="rutCliente" value="{{ cliente.rutCliente }}" required maxlength="8" oninput="validarNumeroPositivo(this)">
+            </div>
+            <div class="form-group">
+                <label for="dvCliente">DV Cliente:</label>
+                <input type="text" class="form-control" id="dvCliente" name="dvCliente" value="{{ cliente.dvCliente }}" required oninput="validarUnSoloCaracter(this)"></input>
+            </div>
+            <div class="form-group">
+                <label for="nombreCliente">Nombre Cliente:</label>
+                <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" value="{{ cliente.nombreCliente }}" required>
+            </div>
+            <div class="estadoCliente">
+                <label for="estadoCliente">Estado Cliente:</label>
+                <select class="form-control" id="estadoCliente" name="estadoCliente">
+                    <option value="" disabled>Seleccione un estado</option>
+                    {% if cliente.estadoCliente == "Al Dia" %}
+                        <option value="Al Dia" selected>Al Dia</option>
+                        <option value="Con Deuda">Con Deuda</option>
+                        <option value="Sin Registro">Sin registro</option>
+                    {% elif cliente.estadoCliente == "Con Deuda" %}
+                        <option value="Al Dia">Al Dia</option>
+                        <option value="Con Deuda" selected>Con Deuda</option>
+                        <option value="Sin Registro">Sin registro</option>
+                    {% else %}
+                        <option value="Al Dia">Al Dia</option>
+                        <option value="Con Deuda">Con Deuda</option>
+                        <option value="Sin Registro" selected>Sin registro</option>
+                    {% endif %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Direccion:</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" value="{{ cliente.direccion }}" required>
+            </div>
+            <button type="button" class="btn btn-danger" id="cancelar-button">Atras</button>
+            <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
+            <button type="submit" class="btn btn-primary" id="guardar-buton">Guardar</button>
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('cancelar-button').addEventListener('click', function() {
+            window.location.href = 'http://127.0.0.1:8000/clientes';
+        });
+    </script>
+    <script>
+        function limpiarFormulario() {
+            document.getElementById('rutCliente').value = '';
+            document.getElementById('dvCliente').value = '';
+            document.getElementById('nombreCliente').value = '';
+            document.getElementById('estadoCliente').value = '';
+            document.getElementById('direccion').value = '';
+        }
+    </script>
+    <script>
+        document.getElementById('guardar-buton').addEventListener('click', function() {
+            window.location.href = 'http://127.0.0.1:8000/clientes';
+        });
+    </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function validarNumeroPositivo(input) {
+        input.value = input.value.replace(/[^\d]/g, '');
+        if (input.value < 0) {
+            input.value = '';
+        }
+    }
+    function validarUnSoloCaracter(input) {
+    input.value = input.value.substring(0, 1);
+    if (!/^\d|k$/i.test(input.value)) {
+        input.value = '';
+    }
+}
+</script>
+{% if messages %} {% for m in messages %}
+<script>
+    swal.fire({
+        "title": "HECHO",
+        "text": "{{m}}",
+        "icon": "success"
+    })
+</script>
+{% endfor %} {% endif %}
+
+
+</html>

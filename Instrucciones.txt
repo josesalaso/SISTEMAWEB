@@ -1,0 +1,17 @@
+cd SistemaVentas
+py manage.py runserver
+pip install Django
+pip install firebase-admin
+pip install requests
+pip install pandas
+pip install matplotlib
+
+Usuarios
+josalasolivares@gmail.com;   Usuario admin
+user@gmail.com;   Usuario Ventas
+usuario1@gmail.com;   Usuario Inventarios
+
+mail que envia automatico ( se activo pop e imap en config y se genero contraseña de aplicacion python que esta en codigo): 
+josalasolivares@gmail.com
+
+El link de generar contraseña lo envía a la consola de nuestra aplicación (de momento)

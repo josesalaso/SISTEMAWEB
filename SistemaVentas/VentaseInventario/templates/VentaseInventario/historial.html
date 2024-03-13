@@ -1,0 +1,199 @@
+{% extends "VentaseInventario/template.html" %}
+{% load static %}
+
+{% block style %}
+<style>
+    :root {
+        --color-primario: #363062;
+        --color-secundario: #4D4C7D;
+        --color-terciario: #F99417;
+        --color-cuartario: #F5F5F5;
+    }
+
+    .historial-container {
+        width: 100%;
+        display: grid;
+        grid-template-rows: 20% 80% ;
+        height: 100vh;
+    }
+
+    .header-historial {
+        grid-row: 1;
+        background-color: var( --color-primario);
+        height: 100%;
+        width: 100%;
+        padding-top: .5%;
+    }
+
+    .titulo-historial {
+        width: 100%;
+        height: 30%;
+    }
+
+    .titulo-historial h1 {
+        text-align: center;
+        color: var(--color-cuartario);
+    }
+
+    .buscador-historial {
+        width: 100%;
+        height: 30%;
+    }
+
+    .buscador-historial input[type="text"] {
+        padding: 10px;
+        margin-bottom: 10px;
+        width: 80%;
+        margin-left: 10%;
+        border: 1px solid var(--color-terciario);
+    }
+    
+    .buscador-historial .searchInput, .filterSelect {
+        padding: 8px; 
+        border-radius: 5px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        border: 1px solid var(--color-terciario);
+    }
+
+    .filtro-historial {
+        width: 100%;
+        height: 30%;
+        padding-left: 10%;
+    }
+
+    .filtro-historial label {
+        font-size: 16px;
+        color: var(--color-cuartario);
+    }
+
+    .tabla-historial {
+        grid-row: 2;
+        background-color: var(--color-secundario);
+        height: 100%;
+        width: 100%;
+        padding: 1%;
+        overflow: auto;
+    }
+
+    .tabla-historial table {
+        background-color: var(--color-cuartario);
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 20px;
+        overflow: auto;
+    }
+    
+    .tabla-historial table, th, td {
+        border: 1px solid #ccc;
+    }
+    
+    .tabla-historial th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: var(--color-cuartario);
+        color: var(--color-primario);
+    }
+    th, td {
+        border: 1px solid var(--color-primario);
+        padding: 10px;
+        text-align: center;
+    }
+    th {
+        background-color: var(--color-primario);
+        color: var(--color-cuartario);
+    }
+
+    .divTabla {
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-cuartario);
+        border-radius: 15px;
+        padding: 1.5vh;
+        overflow: auto;
+    }
+
+    .divTabla table, th, td {
+        border: 1px solid var(--color-terciario);
+    }
+
+    .divTabla th {
+        padding: 10px;
+        background-color: var(--color-primario);
+        color: var(--color-cuartario);
+    }
+
+    .divTabla td {
+        padding: 6px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="historial-container">
+    <div class="header-historial">
+        <div class="titulo-historial">
+            <h1>Historial</h1>
+        </div>
+        <div class="buscador-historial">
+            <input type="text" id="searchInput" class="searchInput" placeholder="Buscar...">
+        </div>
+    </div>
+    <div class="tabla-historial">
+        <div class="divTabla">
+            <table id="dataTable">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th>Tipo Modificación</th>
+                    <th>Descripción</th>
+                </tr>
+                {% for histo in historial %}
+                <tr>
+                    <td>{{ histo.fecha }}</td>
+                    <td>{{ histo.idUsuario }}</td>
+                    <td>{{ histo.tipoModificacion }}</td>
+                    <td>{{ histo.descripcion }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    const searchInput = document.getElementById("searchInput");
+const dataTable = document.getElementById("dataTable");
+const rows = dataTable.getElementsByTagName("tr");
+
+searchInput.addEventListener("input", function () {
+    const searchText = searchInput.value.toLowerCase();
+
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const rowData = row.textContent.toLowerCase();
+        if (rowData.includes(searchText)) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+                }
+            }
+});
+function getColumnIndex(columnName) {
+    const headers = dataTable.getElementsByTagName("th");
+    for (let i = 0; i < headers.length; i++) {
+        if (headers[i].textContent.trim() === columnName) {
+            return i;
+                }
+            }
+        return -1;
+        }
+</script>
+{% endblock %}

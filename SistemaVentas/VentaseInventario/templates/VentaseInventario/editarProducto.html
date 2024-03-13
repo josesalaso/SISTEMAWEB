@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Producto</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+         :root {
+            --color-primario: #363062;
+            --color-secundario: #4D4C7D;
+            --color-terciario: #F99417;
+            --color-cuartario: #F5F5F5;
+        }
+        
+        body {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            background-color: var(--color-primario);
+            color: var(--color-cuartario);
+            border: 1px solid var(--color-terciario);
+        }
+        
+        .btn {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{% if message.tags == 'success' %}alert alert-success{% elif message.tags == 'error' %}alert alert-danger{% endif %}">
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="container">
+        <h1>Editar Producto</h1>
+        <form id="product-form" method="post">
+            {% csrf_token %}
+            <input type="number" value="{{ producto.id }}" id="producto_id" name="producto_id" style="display: none;">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="{{ producto.nombreProducto }}" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ producto.descripcion }}" required></input>
+            </div>
+            <div class="form-group">
+                <label for="cantidad_esperada">Cantidad Esperada:</label>
+                <input type="number" class="form-control" oninput="validarNumeroPositivo(this)" id="cantidad_esperada" name="cantidad_esperada" value="{{ producto.cantidadEsperada }}" required>
+            </div>
+            <div class="form-group">
+                <label for="precio_unidad">Precio:</label>
+                <input type="number" class="form-control" oninput="validarNumeroPositivo(this)" id="precio_unidad" name="precio_unidad" value="{{ producto.precioUnitario }}" required>
+            </div>
+            <div class="form-group">
+                <label for="cantidad_actual">Cantidad Actual:</label>
+                <input type="number" class="form-control" oninput="validarNumeroPositivo(this)" id="cantidad_actual" name="cantidad_actual" value="{{ producto.cantidadActual }}" required>
+            </div>
+            <div class="form-group">
+                <label for="idProveedor">Proveedor:</label>
+                <select class="form-control" id="idProveedor" name="idProveedor">
+                    <option value="" disabled selected>Seleccione el proveedor</option>
+                    {% for prov in proveedores %}
+                        {% if prov.rut == producto.rutProveedor %}
+                        <option value="{{ prov.rut }}" selected>{{ prov.nombre }} : {{ prov.rut }}-{{ prov.dv }}</option>
+                        {% else %}
+                        <option value="{{ prov.rut }}">{{ prov.nombre }} : {{ prov.rut }}-{{ prov.dv }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-danger" id="cancelar-button">Cancelar</button>
+            <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('cancelar-button').addEventListener('click', function() {
+            window.close();
+        });
+
+        function limpiarFormulario() {
+            document.getElementById('nombre').value = '';
+            document.getElementById('descripcion').value = '';
+            document.getElementById('cantidad_esperada').value = '';
+            document.getElementById('precio_unidad').value = '';
+            document.getElementById('cantidad_actual').value = '';
+            document.getElementById('proveedor').value = '';
+        }
+        function validarNumeroPositivo(input) {
+            input.value = input.value.replace(/[^\d]/g, '');
+            if (input.value < 0) {
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% if messages %} {% for m in messages %}
+<script>
+    swal.fire({
+        "title": "HECHO",
+        "text": "{{m}}",
+        "icon": "success"
+    })
+</script>
+{% endfor %} {% endif %}
+
+</html>

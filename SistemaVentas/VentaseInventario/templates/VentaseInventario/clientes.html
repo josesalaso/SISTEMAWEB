@@ -1,0 +1,104 @@
+{% extends "VentaseInventario/inventario.html" %}
+{% load static %}
+
+{% block titulo %}Inventario{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'styles/inventario.css' %}?{% now 'U' %}">
+<style>
+    .modificar-button {
+    background-color: var(--color-terciario);
+    color: var(--color-primario);
+    border: none;
+    width: 100%;
+    height: 100%;
+    }
+    .eliminar-button {
+        color: var(--color-primario);
+        border: none;
+        width: 100%;
+        height: 100%;
+    }
+    .custom-alert{
+        font-size: 20px; 
+    }
+</style>
+{% endblock %}
+{% block header %}
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="custom-alert alert alert-danger" role="alert"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+<div class="titulo-inventario">
+    <h1>Clientes</h1>
+</div>
+<div class="buscador-inventario">
+    <input type="text" id="searchInput" class="searchInput" placeholder="Buscar...">
+</div>
+{% endblock %}
+
+{% block tabla %}
+<div class="divTabla">
+    <table id="dataTable" class="white-background">
+        <tr>
+            <th>Rut cliente</th>
+            <th>DV cliente</th>
+            <th>Nombre cliente</th>
+            <th>Estado cliente</th>
+            <th>Direccion</th>
+            <th>Modificar</th>
+            <th>Eliminar</th> 
+        </tr>
+        {% for cli in cliente %}
+        <tr>
+            <td style="text-align: right;">{{ cli.id }}</td>
+            <td style="text-align: right;">{{ cli.dvCliente }}</td>
+            <td>{{ cli.nombreCliente }}</td>
+            <td>{{ cli.estadoCliente }}</td>
+            <td>{{ cli.direccion }}</td>
+            <td>
+                <form method="post" action="{% url 'editarProveedor' %}">
+                    {% csrf_token %}
+                    <input type="text" value="{{ cli.id }}"  name="cliente_id" style="display: none;">
+                    <a href="{% url 'editarCliente' %}?cliente_id={{ cli.id }}" class="btn btn-success modificar-button">Modificar</a>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'eliminar_cliente' cli.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-danger eliminar-button" onclick="return confirmarEliminacion('{{ pro.id }}')">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
+
+{% block botones %}
+{% if role == 'admin' or role == 'inventario' or role == 'ventasInventario' %}
+    <button class="boton-venta-mod"><a id="abrirVentana5" style="text-decoration: none;" href="#">Agregar Clientes</a></button>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+<script>
+    function confirmarEliminacion(clienteId) {
+        return confirm("¿Estás seguro de que deseas eliminar esta venta?");
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        const abrirVentanaButton1 = document.getElementById("abrirVentana5");
+    
+        abrirVentanaButton1.addEventListener("click", function () {
+            const anchoPantalla = window.screen.width;
+            const alturaPantalla = window.screen.height;
+            const ventanaEmergente1 = window.open("http://127.0.0.1:8000/agregarCliente", "MiniVentana", `width=${anchoPantalla},height=${alturaPantalla}`);
+            ventanaEmergente1.document.close();
+        });
+    });
+    
+</script>
+{% endblock %}

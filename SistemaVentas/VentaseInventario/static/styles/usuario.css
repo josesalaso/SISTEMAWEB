@@ -1,0 +1,196 @@
+:root {
+    --color-primario: #363062;
+    --color-secundario: #4D4C7D;
+    --color-terciario: #F99417;
+    --color-cuartario: #F5F5F5;
+}
+
+.ventas-container {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 20% 70% 10%;
+    height: 100vh;
+}
+
+.header-ventas {
+    grid-row: 1;
+    background-color: var( --color-primario);
+    height: 100%;
+    width: 100%;
+    padding-top: .5%;
+}
+
+.titulo-ventas {
+    width: 100%;
+    height: 30%;
+}
+
+.titulo-ventas h1 {
+    text-align: center;
+    color: var(--color-cuartario);
+}
+
+.buscador-ventas {
+    width: 100%;
+    height: 30%;
+}
+
+.buscador-ventas input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+    margin-left: 10%;
+    border: 1px solid var(--color-terciario);
+}
+  
+.buscador-ventas .searchInput, .filterSelect {
+    padding: 8px; 
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border: 1px solid var(--color-terciario);
+}
+
+.filtro-ventas {
+    width: 100%;
+    height: 30%;
+    padding-left: 10%;
+}
+
+.filtro-ventas label {
+    font-size: 16px;
+    color: var(--color-cuartario);
+}
+
+.tabla-ventas {
+    grid-row: 2;
+    background-color: var(--color-secundario);
+    height: 100%;
+    width: 100%;
+    padding: 1%;
+}
+
+.tabla-ventas table {
+    background-color: var(--color-cuartario);
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 20px;
+    overflow: auto;
+    /* TODO: Llenar tabla y ver si funciona el scroll */
+}
+  
+.tabla-ventas table, th, td {
+    border: 1px solid #ccc;
+}
+  
+.tabla-ventas th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.botones-ventas {
+    grid-row: 3;
+    background-color: var(--color-primario);
+    height: 100%;
+    width: 100%;
+    padding: 1%;
+}
+  
+.boton-venta {
+    background-color: var(--color-terciario);
+    border-radius: 10px;
+    width: 20%;
+    height: 100%;
+    font-size: 20px;
+    border: 1px solid var(--color-primario);
+    align-items: center;
+    padding-top: .5%;
+}
+
+.boton-venta a {
+    display: block;
+    text-decoration: none;
+    color: var(--color-primario);
+    width: 100%;
+    height: 100%;
+}
+
+.boton-venta:hover {
+    background-color: var(--color-cuartario);
+}
+
+.boton-venta:hover a {
+    color: var(--color-primario);
+}
+  
+.boton-venta:nth-child(2) {
+    float: right;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: var(--color-cuartario);
+    color: var(--color-primario);
+}
+th, td {
+    border: 1px solid var(--color-primario);
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background-color: var(--color-primario);
+    color: var(--color-cuartario);
+}
+.button-container {
+    display: flex;
+    margin-top: 20px;
+}
+.button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.modificar-button {
+    background-color: var(--color-terciario);
+    color: var(--color-primario);
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+.eliminar-button {
+    color: var(--color-primario);
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+.seleccionar-checkbox {
+    margin: 0;
+}
+.button:hover{
+    background-color: var(--color-cuartario);
+}
+
+.divTabla {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-cuartario);
+    border-radius: 15px;
+    padding: 1.5vh;
+    overflow: auto;
+}
+
+.divTabla table, th, td {
+    border: 1px solid var(--color-terciario);
+}
+
+.divTabla th {
+    padding: 10px;
+    background-color: var(--color-primario);
+    color: var(--color-cuartario);
+}
+
+.divTabla td {
+    padding: 6px;
+}

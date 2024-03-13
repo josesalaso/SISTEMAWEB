@@ -1,0 +1,56 @@
+{% extends "VentaseInventario/template.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block style %}<link rel="stylesheet" href="{% static 'styles/ventas.css' %}?{% now 'U' %}">{% endblock %}
+
+{% block body %}
+<div class="ventas-container">
+    <div class="header-ventas">
+        <div class="titulo-ventas">
+            <h1>Ventas</h1>
+        </div>
+        <div class="buscador-ventas">
+            <input type="text" id="searchInput" class="searchInput" placeholder="Buscar...">
+        </div>
+    </div>
+    <div class="tabla-ventas">
+        <div class="divTabla">
+            <table id="dataTable">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Usuario</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Estado</th>
+                    <th>Pago</th>
+                    <th>Total (CLP)</th>
+                    <th>ID</th>
+                </tr>
+                {% for venta in ventas %}
+                <tr>
+                    <td>{{ venta.rutCliente }}</td>
+                    <td>{{ venta.idUsuario   }}</td>
+                    <td style="text-align: right;">{{ venta.fechaInicio}}</td>
+                    <td style="text-align: right;">{{ venta.fechaFin }}</td>
+                    <td>{{ venta.estado }}</td>
+                    <td>{{ venta.tipoPago }}</td>
+                    <td style="text-align: right;">{{ venta.total|floatformat:0|intcomma}}</td>
+                    <td style="text-align: center;">{{ venta.id }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="botones-ventas">
+        {% if role == 'admin' or role == 'ventas' or role == 'ventasInventario' %}
+        <button class="boton-venta"><a id="abrirVentana1">Actualizar Venta</a></button>
+        <button class="boton-venta"><a id="abrirVentana2">Bitacora</a></button>
+        <button class="boton-venta"><a id="abrirVentana">Agregar Venta</a></button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'scripts/ventas.js' %}"></script>
+{% endblock %}

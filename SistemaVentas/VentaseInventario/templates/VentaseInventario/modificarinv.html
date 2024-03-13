@@ -1,0 +1,119 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        :root {
+            --color-primario: #363062;
+            --color-secundario: #4D4C7D;
+            --color-terciario: #F99417;
+            --color-cuartario: #F5F5F5;
+        }
+        body {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+        }
+        .container {
+            background-color: var(--color-secundario);
+            color: var(--color-cuartario);
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--color-cuartario);
+            color: var(--color-primario);
+        }
+        th, td {
+            border: 1px solid var(--color-primario);
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: var(--color-primario);
+            color: var(--color-cuartario);
+        }
+        .button-container {
+            display: flex;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .modificar-button {
+            background-color: var(--color-terciario);
+            color: var(--color-primario);
+            border: none;
+        }
+        .seleccionar-checkbox {
+            margin: 0;
+        }
+        .button:hover{
+            background-color: var(--color-cuartario);
+        }
+        .custom-alert{
+            font-size: 20px; 
+        }
+    </style>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="custom-alert alert alert-danger" role="alert"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad Esperada</th>
+                    <th>Descripción</th>
+                    <th>Rut Proveedor</th>
+                    <th>Precio Unitario</th>
+                    <th>Cantidad Actual</th>
+                    <th>Usuario</th>
+                    <th>ID</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="inventory-table-body">
+                {% for product in productos %}
+                <tr>
+                    <td>{{ product.nombreProducto }}</td>
+                    <td>{{ product.cantidadEsperada }}</td>
+                    <td>{{ product.descripcion }}</td>
+                    <td>{{ product.rutProveedor }}</td>
+                    <td>{{ product.precioUnitario }}</td>
+                    <td>{{ product.cantidadActual }}</td>
+                    <td>{{ product.idUsuario }}</td>
+                    <td>{{ product.id }}</td>
+                    <td>
+                        <form method="post" action="{% url 'editarProducto' %}">
+                            {% csrf_token %}
+                            <input type="number" value="{{ product.id }}"  name="producto_id" style="display: none;">
+                            <a href="{% url 'editarProducto' %}?producto_id={{ product.id }}" class="btn btn-success modificar-button">Modificar</a>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url 'eliminar_producto' product.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-danger" onclick="return confirmarEliminacion('{{ product.id }}')">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>                      
+        </table>
+    </div>
+</body>
+<script src="{% static 'scripts/inventario.js' %}"></script>
+</html>

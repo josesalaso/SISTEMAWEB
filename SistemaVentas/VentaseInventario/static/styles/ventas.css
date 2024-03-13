@@ -1,0 +1,160 @@
+:root {
+    --color-primario: #363062;
+    --color-secundario: #4D4C7D;
+    --color-terciario: #F99417;
+    --color-cuartario: #F5F5F5;
+}
+
+.ventas-container {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 20% 70% 10%;
+    height: 100vh;
+}
+
+.header-ventas {
+    grid-row: 1;
+    background-color: var( --color-primario);
+    height: 100%;
+    width: 100%;
+    padding-top: .5%;
+}
+
+.titulo-ventas {
+    width: 100%;
+    height: 30%;
+}
+
+.titulo-ventas h1 {
+    text-align: center;
+    color: var(--color-cuartario);
+}
+
+.buscador-ventas {
+    width: 100%;
+    height: 30%;
+}
+
+.buscador-ventas input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+    margin-left: 10%;
+    border: 1px solid var(--color-terciario);
+}
+  
+.buscador-ventas .searchInput, .filterSelect {
+    padding: 8px; 
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border: 1px solid var(--color-terciario);
+}
+
+.filtro-ventas {
+    width: 100%;
+    height: 30%;
+    padding-left: 10%;
+}
+
+.filtro-ventas label {
+    font-size: 16px;
+    color: var(--color-cuartario);
+}
+
+.tabla-ventas {
+    grid-row: 2;
+    background-color: var(--color-secundario);
+    height: 100%;
+    width: 100%;
+    padding: 1%;
+}
+
+.divTabla {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-cuartario);
+    border-radius: 15px;
+    padding: 1.5vh;
+    overflow: auto;
+}
+
+.tabla-ventas .divTabla table {
+    background-color: var(--color-cuartario);
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 20px;
+    overflow: auto;
+}
+  
+.tabla-ventas .divTabla table, th, td {
+    border: 1px solid var(--color-terciario);
+}
+
+.tabla-ventas .divTabla th {
+    background-color: var(--color-primario);
+    color: var(--color-cuartario);
+}
+  
+.tabla-ventas .divTabla th, td {
+    padding: 10px;
+}
+
+.tabla-ventas .divTabla td {
+    padding: 6px;
+}
+
+.botones-ventas {
+    grid-row: 3;
+    background-color: var(--color-primario);
+    height: 100%;
+    width: 100%;
+    padding: 1%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+  
+.boton-venta {
+    background-color: var(--color-terciario);
+    border-radius: 10px;
+    width: 20%;
+    height: 100%;
+    font-size: 20px;
+    border: 1px solid var(--color-primario);
+    align-items: center;
+    padding-top: .5%;
+}
+
+.boton-venta a {
+    display: block;
+    text-decoration: none;
+    color: var(--color-primario);
+    width: 100%;
+    height: 100%;
+}
+
+.boton-venta:hover {
+    background-color: var(--color-cuartario);
+}
+
+.boton-venta:hover a {
+    color: var(--color-primario);
+}
+  
+.boton-venta:nth-child(1) {
+    grid-column: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.boton-venta:nth-child(2) {
+    grid-column: 3;
+    width: 100%;
+    height: 100%;
+}
+
+.boton-venta:nth-child(3) {
+    grid-column: 5;
+    width: 100%;
+    height: 100%;
+}

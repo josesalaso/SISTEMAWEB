@@ -1,0 +1,63 @@
+{% extends "VentaseInventario/inventario.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block titulo %}Inventario{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'styles/inventario.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block header %}
+<div class="titulo-inventario">
+    <h1>Inventario</h1>
+</div>
+<div class="buscador-inventario">
+    <input type="text" id="searchInput" class="searchInput" placeholder="Buscar...">
+</div>
+{% endblock %}
+
+{% block tabla %}
+<div class="divTabla">
+    <table id="dataTable" class="white-background">
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad Esperada</th>
+            <th>Descripción</th>
+            <th>Proveedor</th>
+            <th>Precio Unitario (CLP)</th>
+            <th>Cantidad Actual</th>
+            <th>Usuario</th>
+            <th>ID</th>
+        </tr>
+        {% for inv in inventario %}
+        <tr>
+            <td>{{ inv.nombreProducto }}</td>
+            <td style="text-align: right;">{{ inv.cantidadEsperada|intcomma }}</td>
+            <td>{{ inv.descripcion }}</td>
+            <td>{{ inv.rutProveedor }}</td>
+            <td style="text-align: right;">{{ inv.precioUnitario|intcomma }}</td>
+            <td style="text-align: right;">{{ inv.cantidadActual|intcomma }}</td>
+            <td>{{ inv.idUsuario }}</td>
+            <td style="text-align: center;">{{ inv.id }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+
+{% block botones %}
+{% if role == 'admin' or role == 'inventario' or role == 'ventasInventario' %}
+    <button class="boton-venta-mod"><a id="abrirVentana1" style="text-decoration: none;" href="#">Actualizar Inventario</a></button>
+    {% if verif_alerta %}
+    <div class="boton-venta-aler">
+        <a id="abrirVentana2" style="text-decoration: none;" href="#">
+            <i class="fa-solid fa-circle-exclamation fa-shake" style="color: #ff0000;"></i>
+        </a>
+    </div>
+    {% else %}
+        <button class="boton-venta-aler" style="display: none;"></button>
+    {% endif %}
+    <button class="boton-venta-agr"><a id="abrirVentana" style="text-decoration: none;" href="#">Agregar Inventario</a></button>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "VentaseInventario/template.html" %} {% load static %} {% block titulo %}Analsis{% endblock %} {% block style %}
+<link rel="stylesheet" href="{% static 'styles/analisis.css' %}?{% now 'U' %}">{% endblock %} {% block body %}
+<div class="ventana-analisis">
+    <div class="header-analisis">
+        <div class="titulo-analisis">
+            <h1>Análisis</h1>
+        </div>
+        <div class="buscador-analisis">
+            <input type="text" id="searchInput" class="searchInput" placeholder="Buscar...">
+        </div>
+    </div>
+    <div class="tabla-analisis">
+        <div class="divTabla">
+            <table id="dataTable" class="white-background">
+                <tr>
+                    <th>Título</th>
+                    <th>Tabla</th>
+                    <th>Label X</th>
+                    <th>Label Y</th>
+                    <th>Tipo Gráfico</th>
+                    <th>Usuario creador</th>
+                    <th>Gráfico</th>
+                </tr>
+                {% for ana in analisis %}
+                <tr>
+                    <td>{{ ana.titulo }}</td>
+                    <td>{{ ana.tabla }}</td>
+                    <td>{{ ana.labelX }}</td>
+                    <td>{{ ana.labelY }}</td>
+                    <td>{{ ana.tipoGrafico }}</td>
+                    <td>{{ ana.idUsuario }}</td>
+                    <td style="text-align: center;">
+                        <img  
+                            src="{% static ana.imgAnalisis %}"
+                            alt="Grafico actual"
+                            onclick="abrirModal('{% static ana.imgAnalisis %}')"
+                            class="imagen-analisis"
+                            
+                        >
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="botones-analisis">
+        <button class="boton-venta"><a id="abrirVentana2">Actualizar Análisis</a></button>
+        <button class="boton-venta"><a id="abrirVentana1">Agregar Análisis</a></button>
+    </div>
+</div>
+{% endblock %} {% block scripts %}
+<script src="{% static 'scripts/analisis.js' %}"></script>
+{% endblock %}

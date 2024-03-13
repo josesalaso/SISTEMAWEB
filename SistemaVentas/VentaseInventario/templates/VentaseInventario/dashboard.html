@@ -1,0 +1,170 @@
+{% extends "VentaseInventario/template.html" %}
+{% load static %}
+{% load humanize %}
+
+
+{% block style %}<link rel="stylesheet" href="{% static 'styles/dashboard.css' %}?{% now 'U' %}">
+<style>
+    .imagen-ampliada {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .imagen-ampliada img {
+        max-width: 95%;
+        max-height: 95%;
+        border: 3px solid #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+</style>
+{% endblock %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+<div class="dashboard">
+    <div class="resumen-dashboard">
+        <div class="res-informacion"><!-- Ventas Activas -->
+            <div class="res-valor"><h1>{{ resumen_dashboard.valor_1 }}</h1></div>
+            <div class="res-icon"><i class="fa-solid fa-chart-column" onclick="ampliarImagen(this)" data-ruta-grafico="{% static resumen_dashboard.graph_1 %}"></i></div>
+            <div class="res-desc"><p>Productos asociados por venta</p></div>
+        </div>
+        <div class="res-informacion"><!-- Ventas en proceso de confirmación -->
+            <div class="res-valor"><h1>{{ resumen_dashboard.valor_2 }}</h1></div>
+            <div class="res-icon"><i class="fa-solid fa-chart-column" onclick="ampliarImagen(this)" data-ruta-grafico="{% static resumen_dashboard.graph_2 %}"></i></div>
+            <div class="res-desc"><p>Cantidad de alertas activas</p></div>
+        </div>
+        <div class="res-informacion"><!-- Ventas atrasadas en pago -->
+            <div class="res-valor"><h1>{{ resumen_dashboard.valor_3 }}</h1></div>
+            <div class="res-icon"><i class="fa-solid fa-chart-pie" onclick="ampliarImagen(this)" data-ruta-grafico="{% static resumen_dashboard.graph_3 %}"></i></div>
+            <div class="res-desc"><p>Cantidad de modificaciones mensuales</p></div>
+        </div>
+        <div class="res-informacion"><!-- Cantidad de productos con bajo stock -->
+            <div class="res-valor"><h1>{{ resumen_dashboard.valor_4 }}</h1></div>
+            <div class="res-icon"><i class="fa-solid fa-chart-pie" onclick="ampliarImagen(this)" data-ruta-grafico="{% static resumen_dashboard.graph_4 %}"></i></div>
+            <div class="res-desc"><p>Cantidad de proveedores</p></div>
+        </div>
+    </div>
+    <div class="ventas-dashboard">
+        <h3 style="text-align: center;">Ventas</h3>
+        <table class="white-background1">
+            <tr>
+                <th>Cliente</th>
+                <th>Usuario</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Estado</th>
+                <th>Pago</th>
+                <th>Total</th>
+                <th>ID</th>
+            </tr>
+            {% for venta in ventas %}
+            <tr>
+                <td>{{ venta.rutCliente }}</td>
+                <td>{{ venta.idUsuario   }}</td>
+                <td style="text-align: right;">{{ venta.fechaInicio }}</td>
+                <td style="text-align: right;">{{ venta.fechaFin }}</td>
+                <td>{{ venta.estado }}</td>
+                <td>{{ venta.tipoPago }}</td>
+                <td style="text-align: right;">{{ venta.total|floatformat:0|intcomma }}</td>
+                <td style="text-align: center;">{{ venta.id }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="inventario-dashboard">
+        <h3 style="text-align: center;">Inventario</h3>
+        <table class="white-background1">
+            <tr>
+                <th>Nombre</th>
+                <th>Cantidad Esperada</th>
+                <th>Descripción</th>
+                <th>Proveedor</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad Actual</th>
+                <th>Usuario</th>
+                <th>ID</th>
+            </tr>
+            {% for inv in inventario %}
+            <tr>
+                <td>{{ inv.nombreProducto }}</td>
+                <td style="text-align: right;">{{ inv.cantidadEsperada|intcomma }}</td>
+                <td >{{ inv.descripcion }}</td>
+                <td>{{ inv.rutProveedor }}</td>
+                <td style="text-align: right;">{{ inv.precioUnitario|intcomma }}</td>
+                <td style="text-align: right;">{{ inv.cantidadActual|intcomma }}</td>
+                <td>{{ inv.idUsuario }}</td>
+                <td style="text-align: center;">{{ inv.id }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="analisis-dashboard">
+        <div class="grafico1">
+            <div class="opciones-graficos">
+                <select id="opcionesGraficos1" onchange="mostrarLog1()" name="opcionesGraficos" class="selectGraficos" style="height: 100%; border-radius: 10px">
+                    <option value="" disabled selected>Seleccione el gráfico que desea visualizar...</option>
+                    {% for ana in analisis %}
+                        <option value="{{ ana.imgAnalisis }}">{{ ana.titulo }} - Grafico de {{ ana.tipoGrafico }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="graficos">
+                <img id="imgSeleccionada1" src="{% static 'img/graficos/logoGrafico.png' %}" alt="Grafico actual">
+            </div>
+        </div>      
+        <div class="grafico2">
+            <div class="opciones-graficos">
+                <select id="opcionesGraficos2" onchange="mostrarLog2()" name="opcionesGraficos" class="selectGraficos" style="height: 100%; border-radius: 10px">
+                    <option value="" disabled selected>Seleccione el gráfico que desea visualizar...</option>
+                    {% for ana in analisis %}
+                        <option value="{{ ana.imgAnalisis }}">{{ ana.titulo }} - Grafico de {{ ana.tipoGrafico }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="graficos">
+                <img id="imgSeleccionada2" src="{% static 'img/graficos/logoGrafico.png' %}" alt="Grafico actual" class="imagen">
+            </div>
+        </div>
+        <div class="grafico3">
+            <div class="opciones-graficos">
+                <select id="opcionesGraficos3" onchange="mostrarLog3()" name="opcionesGraficos" class="selectGraficos" style="height: 100%; border-radius: 10px">
+                    <option value="" disabled selected>Seleccione el gráfico que desea visualizar...</option>
+                    {% for ana in analisis %}
+                        <option value="{{ ana.imgAnalisis }}">{{ ana.titulo }} - Grafico de {{ ana.tipoGrafico }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="graficos">
+                <img id="imgSeleccionada3" src="{% static 'img/graficos/logoGrafico.png' %}" alt="Grafico actual">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        function ampliarImagen(icono) {
+            var rutaGrafico = icono.getAttribute('data-ruta-grafico');
+            var contenedorAmpliado = document.createElement('div');
+            contenedorAmpliado.className = 'imagen-ampliada';
+            var imagenAmpliada = document.createElement('img');
+            imagenAmpliada.src = rutaGrafico;
+            imagenAmpliada.alt = 'Grafico Ampliado';
+            contenedorAmpliado.appendChild(imagenAmpliada);
+            document.body.appendChild(contenedorAmpliado);
+            contenedorAmpliado.onclick = function () {
+                document.body.removeChild(contenedorAmpliado);
+            };
+        }
+    </script>
+{% endblock %}

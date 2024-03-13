@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Ventas e Inventario</title>
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}?{% now 'U' %}">
+    <script src="{% static 'scripts/modal.js' %}"></script>
+</head>
+
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div id="recuperarModal" class="modal_recuperar">
+        <div class="contenidoModalRecuperar">
+            <h2>Ingrese su Email</h2>
+            <p>Se le enviara una notificación al administrador para que envie un e-mail de recuperación</p>
+            <form method="post" action="{% url 'reset_password' %}">
+                {% csrf_token %}
+                <input type="email" id='email' name="email" placeholder="Email" required="required" />
+                <button type="submit" id="login">Recuperar contraseña</button>
+            </form>
+        </div>
+    </div>
+
+    {% if error %}
+    <div id="errorModal" class="modal">
+        <div class="contenidoModal">
+            <h2>Error al iniciar sesión</h2>
+            <br>
+            <p>{{ error }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="login-box">
+        <h1>Iniciar Sesión</h1>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="email" id='email' name="email" placeholder="Email" required="required" />
+            <input type="password" id='pass' name="pass" placeholder="Contraseña" required="required" />
+            <button type="submit" id="login">Iniciar Sesión</button>
+            <a href="#" onclick="abrirRecuperar(); return false">¿Olvidaste tu contraseña?</a><br>
+        </form>
+    </div>
+</body>
+
+</html>
