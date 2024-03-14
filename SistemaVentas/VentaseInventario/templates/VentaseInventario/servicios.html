@@ -24,7 +24,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!--CSS-->
-    <link rel="stylesheet" href="{% static 'styles/home.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}?{% now 'U' %}">
 
     <!-- BOOTRSTRAP JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -67,7 +67,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'home' %}"><b>Inicio</b> <span
+                            <a class="nav-link" href="{% url 'index' %}"><b>Inicio</b> <span
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
@@ -184,8 +184,8 @@
             <div class="col-6 col-md">
                 <h5>Acerca</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="{% url 'home' %}">Contacto</a></li>
-                    <li><a class="text-muted" href="{% url 'home' %}">Ubicacion</a></li>
+                    <li><a class="text-muted" href="{% url 'index' %}">Contacto</a></li>
+                    <li><a class="text-muted" href="{% url 'index' %}">Ubicacion</a></li>
                     <li><a class="text-muted">Trabajos en TODAS las regiones de Chile</a></li>
                 </ul>
             </div>

@@ -17,7 +17,7 @@ urlpatterns = [
 
 urlpatterns = [
     # Ventanas principales
-    path('', views.home, name='home'),
+    path('', views.index, name='index'),
     path('servicios/', views.servicios, name='servicios'),
     path('experienciayclientes/', views.experienciayclientes, name='experienciayclientes'),
     path('contacto/', views.contacto, name='contacto'),

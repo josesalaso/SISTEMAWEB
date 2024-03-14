@@ -1855,8 +1855,8 @@ def reset_password(request):
     return render(request,'login')
 
 
-def home(request):
-    return render(request,'VentaseInventario/home.html')
+def index(request):
+    return render(request,'VentaseInventario/index.html')
 
 def servicios(request):
     return render(request,'VentaseInventario/servicios.html')
