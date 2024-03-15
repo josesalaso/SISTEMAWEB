@@ -1571,7 +1571,7 @@ def historial(request):
         for doc in historial:
             hist = doc.to_dict()
             list_values_historial.append(hist)
-        list_values_historial = sorted(list_values_historial, key=lambda x: datetime.strptime(x['fecha'], '%Y-%m-%d %H:%M:%S'))
+        list_values_historial = sorted(list_values_historial, key=lambda x: datetime.strptime(x.get('fecha', '1900-01-01 00:00:00'), '%Y-%m-%d %H:%M:%S'))
         list_values_historial.reverse()
         return render(request, 'VentaseInventario/historial.html', {'role': request.session.get('role'), 'historial': list_values_historial})
     else:
