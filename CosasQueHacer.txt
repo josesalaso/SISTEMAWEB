@@ -20,3 +20,7 @@ Configurar seguridad
 Estar implementado con oracle XE todo el sistema
 Mismo Pc con maquina virtual kali para defensa
 Con dominio crear mail corporativos con tu pc como servidor o con zoho mail 3 nomas
+Ver si se puede gregar algun tipo de Ia en la pagina a los datos para el usuario
+Agregar entidades a base de datos de sensores 
+Guardar datos de sensores de ia de drones en base datos sistema automatico
+enseñar movimientos a drones y defensas escudo y ataque
