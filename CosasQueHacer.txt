@@ -1,0 +1,22 @@
+Implementar Imagenes en sistema inventario y shop
+Implementar Carrito de compras y Store
+Implementar Usuarios2 e invitados para carrito de compras
+Implementar link de pago mercado pago
+Implementar que cuando pague le envie por mail los detalles en pdf
+Implementar que cuando haya pagado el producto se reste del inventario recien
+Implementar todo el sistema juntoen su base de datos
+Implementar ORACLESQLXE 
+Implementar Mysql (paracpanel)
+Implementar transbank/webpay con empresa creada
+Implementar envio de facturas/boleta SII software autoamtico gratis
+Agregar grafico circular al generar analisis
+Eliminar 2 graficos en dashboard
+Acomodar dashboard con lo que haya
+Hacer responsivo cuando se aprete el menu del sistema
+Cambiar color de fondo Sistema a blanco y azul marino
+Agregar codigo ipinfo de visitantes o equivalente para ver quienes y registrar ip
+Convertir Pc en servidor con ubuntu maquina virtual
+Configurar seguridad
+Estar implementado con oracle XE todo el sistema
+Mismo Pc con maquina virtual kali para defensa
+Con dominio crear mail corporativos con tu pc como servidor o con zoho mail 3 nomas
