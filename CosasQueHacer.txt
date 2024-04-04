@@ -5,15 +5,20 @@ Implementar link de pago mercado pago
 Implementar que cuando pague le envie por mail los detalles en pdf
 Implementar que cuando haya pagado el producto se reste del inventario recien
 Implementar todo el sistema juntoen su base de datos
-Implementar ORACLESQLXE 
+Implementar ORACLESQLXE
 Implementar Mysql (paracpanel)
+Crear rol empresa sii
 Implementar transbank/webpay con empresa creada
-Implementar envio de facturas/boleta SII software autoamtico gratis
+Implementar envio de facturas/boleta SII software automatico gratis
+agregar verificacion de 2 pasos codigo mail y celuopcional
+agregar verificacion de 2 pasos mail para cuando vaya a eliminar o agregar o modificar producto/cliente/venta/proveedor etc 
+por seguridad en caso de hackeo de cuenta pero solo desde el sistema inventario no desde el shop carrito
 Agregar grafico circular al generar analisis
 Eliminar 2 graficos en dashboard
 Acomodar dashboard con lo que haya
 Hacer responsivo cuando se aprete el menu del sistema
 Cambiar color de fondo Sistema a blanco y azul marino
+Agregar mini click a los graficos de los KPI del dashboard
 Agregar codigo ipinfo de visitantes o equivalente para ver quienes y registrar ip
 Convertir Pc en servidor con ubuntu maquina virtual
 Configurar seguridad
@@ -21,6 +26,15 @@ Estar implementado con oracle XE todo el sistema
 Mismo Pc con maquina virtual kali para defensa
 Con dominio crear mail corporativos con tu pc como servidor o con zoho mail 3 nomas
 Ver si se puede gregar algun tipo de Ia en la pagina a los datos para el usuario
+Luego de Vender y que funcione, empezar a vender el sistema a otras personas como planes
+Agregar funcionalidades premium para cobrar mas por mes
+ver si vender usando cpanel o con tu propio server como pc o servidor nuevo
+ver si se pueden automatizar procesos con uipath para mas funcionalidades que se requieran
+
+
+OPCIONAL
+HACER EL EXCEL DE EVALUACION DE PROYECTOS CON INVERSIONISTAS Y AÑOS A FUTURO EN CASO DE PRESENTARLO COMO PROYECTO
+---------------------------------------------------------------
 Agregar entidades a base de datos de sensores 
 Guardar datos de sensores de ia de drones en base datos sistema automatico
-enseñar movimientos a drones y defensas escudo y ataque
+enseñar movimientos a drones y defensas escudo(radiaciones tbn) y ataque RaspberriPi con cam o Rasberripico
