@@ -7,6 +7,7 @@ Implementar que cuando haya pagado el producto se reste del inventario recien
 Implementar todo el sistema juntoen su base de datos
 Implementar ORACLESQLXE
 Implementar Mysql (paracpanel)
+Implementar adapatar users login a nueva base de datos a users de django y adaptar roles y crear nuevo rol usuario
 Crear rol empresa sii
 Implementar transbank/webpay con empresa creada
 Implementar envio de facturas/boleta SII software automatico gratis
