@@ -20,6 +20,7 @@ Acomodar dashboard con lo que haya
 Hacer responsivo cuando se aprete el menu del sistema
 Cambiar color de fondo Sistema a blanco y azul marino
 Agregar mini click a los graficos de los KPI del dashboard
+agregar para descargar datos en un excel o formato requerido con verificacion 2 pasos para que los clientes tengan un respaldo en caso de querer dejar el servicio o en caso de perdida
 Agregar codigo ipinfo de visitantes o equivalente para ver quienes y registrar ip
 Convertir Pc en servidor con ubuntu maquina virtual
 Configurar seguridad anti sql injection y otros ataques tipicos
@@ -35,6 +36,7 @@ ver si se pueden automatizar procesos con uipath para mas funcionalidades que se
 
 OPCIONAL
 HACER EL EXCEL DE EVALUACION DE PROYECTOS CON INVERSIONISTAS Y AÑOS A FUTURO EN CASO DE PRESENTARLO COMO PROYECTO
+E INVESTIGACION DE MERCADO COMO JUMPSELLER 12k plan mas barato ETC
 ---------------------------------------------------------------
 Agregar entidades a base de datos de sensores 
 Guardar datos de sensores de ia de drones en base datos sistema automatico
