@@ -10,6 +10,7 @@ Implementar Mysql (paracpanel)
 Crear rol empresa sii
 Implementar transbank/webpay con empresa creada
 Implementar envio de facturas/boleta SII software automatico gratis
+Ver si implementar envios con chilesxpress o correos o algo mas internacional en caso de subir a todo el mundo
 agregar verificacion de 2 pasos codigo mail y celuopcional
 agregar verificacion de 2 pasos mail para cuando vaya a eliminar o agregar o modificar producto/cliente/venta/proveedor etc 
 por seguridad en caso de hackeo de cuenta pero solo desde el sistema inventario no desde el shop carrito
@@ -21,7 +22,7 @@ Cambiar color de fondo Sistema a blanco y azul marino
 Agregar mini click a los graficos de los KPI del dashboard
 Agregar codigo ipinfo de visitantes o equivalente para ver quienes y registrar ip
 Convertir Pc en servidor con ubuntu maquina virtual
-Configurar seguridad
+Configurar seguridad anti sql injection y otros ataques tipicos
 Estar implementado con oracle XE todo el sistema
 Mismo Pc con maquina virtual kali para defensa
 Con dominio crear mail corporativos con tu pc como servidor o con zoho mail 3 nomas
