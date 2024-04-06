@@ -6,4 +6,52 @@ pip install requests
 pip install pandas
 pip install matplotlib
 
+CPANEL:
+DIRIGIR DNS EN DOMINIO
+CREAR PYTHON APLICATION
+source /home2/josatel1/virtualenv/josatel/3.8/bin/activate && cd /home2/josatel1/josatel
+ESCRIBIR DEPENDENCIAS PIP EN TERMINALS
+SUBIR ARCHIVOS DEL PROYECTO EN ZIP PARA DESCOMPRIMIR EN TU CARPETA CPANEL JOSATEL
+EN PASSENGER from SistemaVentas.wsgi import application
+
+(PARA BASE DE DATOS MY SQL EN CPANEL)
+pip install pymysql
+
+ESTO EN _INIT_PY
+import pymysql
+pymysql.install_as_MySQLdb()
+
+EN SETTINGS ALLOWED HOST
+josatel.cl y con https las 2 formas.
+
+NOMBRE BD JOSATEL1_JOSATEL Y USUARIO JOSATEL1_JOSATEL1 DE CPANEL EN DATABASES SETTINGS
+Y RUTAS EN SETTING:
+import os
+
+STATIC_URL="/static/"
+MEDIA_URL='/media/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),) 
+STATIC_ROOT='/home2/josatel1/public_html/static'
+MEDIA_ROOT='/home2/josatel1/public_html/media'
+
+CREAR CARPETA assets ahi se guardaran las modelos q se creen
+python manage.py migrate
+python manage.py makemigrations
+
+
+pip freeze
+
+EN TERMINAL CPANEL PYTONAPLICATION:
+source /home2/josatel1/virtualenv/josatel/3.8/bin/activate && cd /home2/josatel1/josatel
+
+Usuarios
+josalasolivares@gmail.com;   Usuario admin
+user@gmail.com;   Usuario Ventas
+usuario1@gmail.com;   Usuario Inventarios
+
+mail que envia automatico 
+(se activo pop e imap en config y se genero contraseña de aplicacion python que esta en codigo): 
+josalasolivares@gmail.com
+
+El link de generar contraseña lo envía a la consola de nuestra aplicación (de momento)
 
