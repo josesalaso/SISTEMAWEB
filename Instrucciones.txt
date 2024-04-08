@@ -22,7 +22,7 @@ import pymysql
 pymysql.install_as_MySQLdb()
 
 EN SETTINGS ALLOWED HOST
-josatel.cl y con https las 2 formas.
+www.josatel.cl y con https las 2 formas y josate.cl.
 
 NOMBRE BD JOSATEL1_JOSATEL Y USUARIO JOSATEL1_JOSATEL1 DE CPANEL EN DATABASES SETTINGS
 Y RUTAS EN SETTING:
@@ -30,7 +30,9 @@ import os
 
 STATIC_URL="/static/"
 MEDIA_URL='/media/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),) 
+STATICFILES_DIRS = [
+    '/home2/josatel1/josatel/VentaseInventario/static',
+]
 STATIC_ROOT='/home2/josatel1/public_html/static'
 MEDIA_ROOT='/home2/josatel1/public_html/media'
 
