@@ -22,6 +22,7 @@ Hacer responsivo cuando se aprete el menu del sistema
 Cambiar color de fondo Sistema a blanco y azul marino
 Agregar mini click a los graficos de los KPI del dashboard
 agregar para descargar datos en un excel o formato requerido con verificacion 2 pasos para que los clientes tengan un respaldo en caso de querer dejar el servicio o en caso de perdida
+Agregar apis de datos en seccion herramientas https://github.com/juanbrujo/listado-apis-publicas-en-chile/tree/master
 Agregar codigo ipinfo de visitantes o equivalente para ver quienes y registrar ip
 Convertir Pc en servidor con ubuntu maquina virtual
 Configurar seguridad anti sql injection y otros ataques tipicos
