@@ -1,4 +1,5 @@
 Implementar Imagenes en sistema inventario y shop
+Implementar HTTPS COMPATIBILIDAD y cambiar contraseña usuario admin
 Implementar Carrito de compras y Store
 Implementar Usuarios2 e invitados para carrito de compras
 Implementar link de pago mercado pago
