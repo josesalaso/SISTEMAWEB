@@ -44,6 +44,10 @@ MEDIA_ROOT='/home2/josatel1/public_html/media'
 LUEGO EN TERMINAL CPANEL  COPIANDO EN PYTONAPLICATION:
 source /home2/josatel1/virtualenv/josatel/3.8/bin/activate && cd /home2/josatel1/josatel
 INSTALAR TODAS LAS DEPENDENCIAS QUE ESTAN MAS ABAJO CON TERMINAL LUEGO QUE TE ACTIVEN TU IP PUBLICA:
+Y FINALMENTE USAS:
+python manage.py collectstatic ( para que envie los staticos a dnd deben estar y empezar funcionar)
+
+
 
 MAILS CORPORATIVOS CON DOMINIO EN CPANEL:
 CREAR MAILS Y ABRIR DESDE PC EN JOSATEL.CL/WEBMAIL
