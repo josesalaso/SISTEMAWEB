@@ -1,59 +1,256 @@
-cd SistemaVentas
-py manage.py runserver
+CREACION DJANGO PYTHON PASO A PASO:
+python
+pip
+pip install django
+python -m django --version
+pip --version
+pip install --upgrade pip (VER SI ESTAN BIEN)
 pip install Django
-pip install firebase-admin
+pip install requests
+dir
+django-admin startproject SistemaVentas
+cd SistemaVentas (cd.. retroceder)
+python manage.py startapp core
+CREAR CARPETAS TEMPLATE/CORE Y STATIC CON img scripts styles Y urls.py( que es dnd van indicadas las templates)
+path('', include('VentaseInventario.urls')), en urlspy de josatel para llamar a core urls que creamos recien
+py manage.py runserver
+
+DEPENDENCIAS PROYECTO ESCENCIALES:
+pip install Django
 pip install requests
 pip install pandas
+pip install firebase-admin(Crear json key y ponerlo en sistema ventas ademas de agregar en settings el db y lo que hace falta)
 pip install matplotlib
+pip freeze o pip list( ver cuales estan instalados)
 
-CPANEL:
+SUBIENDO A HOSTING CPANEL:
+
 DIRIGIR DNS EN DOMINIO
 CREAR PYTHON APLICATION
 source /home2/josatel1/virtualenv/josatel/3.8/bin/activate && cd /home2/josatel1/josatel
 ESCRIBIR DEPENDENCIAS PIP EN TERMINALS
 SUBIR ARCHIVOS DEL PROYECTO EN ZIP PARA DESCOMPRIMIR EN TU CARPETA CPANEL JOSATEL
 EN PASSENGER from SistemaVentas.wsgi import application
+EN SETTINGS ALLOWED HOST
+www.josatel.cl y con https las 2 formas y josate.cl.
+
+EN SETTING.PY PARA QUE PESQUE CPANEL SINO DEJAR COMO ESTABA:
+STATIC_URL="/static/"
+MEDIA_URL='/media/'
+STATICFILES_DIRS = ['/home2/josatel1/josatel/VentaseInventario/static',]
+STATIC_ROOT='/home2/josatel1/public_html/static'
+MEDIA_ROOT='/home2/josatel1/public_html/media'
+
+LUEGO EN TERMINAL CPANEL  COPIANDO EN PYTONAPLICATION:
+source /home2/josatel1/virtualenv/josatel/3.8/bin/activate && cd /home2/josatel1/josatel
+INSTALAR TODAS LAS DEPENDENCIAS QUE ESTAN MAS ABAJO CON TERMINAL LUEGO QUE TE ACTIVEN TU IP PUBLICA:
+
+MAILS CORPORATIVOS CON DOMINIO EN CPANEL:
+CREAR MAILS Y ABRIR DESDE PC EN JOSATEL.CL/WEBMAIL
+Y DESDE CELULAR EN LA APP GMAIL OPCION imap
+EN LA QUE SE PONE EL SERVER QUE TE ENTREGUE CPANEL y tu usuario con contraseña s20.intodomain.com
+
 
 (PARA BASE DE DATOS MY SQL EN CPANEL)
 pip install pymysql
 
-ESTO EN _INIT_PY
+ESTO EN _INIT_PY:
 import pymysql
 pymysql.install_as_MySQLdb()
-
-EN SETTINGS ALLOWED HOST
-www.josatel.cl y con https las 2 formas y josate.cl.
 
 NOMBRE BD JOSATEL1_JOSATEL Y USUARIO JOSATEL1_JOSATEL1 DE CPANEL EN DATABASES SETTINGS
 Y RUTAS EN SETTING:
 import os
-
-STATIC_URL="/static/"
-MEDIA_URL='/media/'
-STATICFILES_DIRS = [
-    '/home2/josatel1/josatel/VentaseInventario/static',
-]
-STATIC_ROOT='/home2/josatel1/public_html/static'
-MEDIA_ROOT='/home2/josatel1/public_html/media'
 
 CREAR CARPETA assets ahi se guardaran las modelos q se creen
 python manage.py migrate
 python manage.py makemigrations
 
 
-pip freeze
+(PARA BASE DE DATOS ORACLE XE LOCAL HOST DESDE PC)
+EN SETTINGS PY:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'xe',
+        'USER': 'c##pepe',
+        'PASSWORD': 'pepe1234',
+        'HOST': '127.0.0.1',
+        'PORT': '1521',
+    }
+}
+ Y TAMBIEN (     'rest_framework',
+    'core', EN INSTALLED APP Y TAMBIEN STATIC_ROOT = os.path.join(BASE_DIR, 'static')  MAS ABAJO)
 
-EN TERMINAL CPANEL PYTONAPLICATION:
-source /home2/josatel1/virtualenv/josatel/3.8/bin/activate && cd /home2/josatel1/josatel
+pip install cx_oracle (configurando backend base datos oracle)
+python .\manage.py makemigrations
+python .\manage.py migrate
+python .\manage.py createsuperuser
+127.0.0.1:8000/admin
+pip install djangorestframework
+django-admin.py startapp rest_producto
+
+
 
 Usuarios
 josalasolivares@gmail.com;   Usuario admin
-user@gmail.com;   Usuario Ventas
-usuario1@gmail.com;   Usuario Inventarios
+@gmail.com;   Usuario Ventas
+@gmail.com;   Usuario Inventarios
 
 mail que envia automatico 
-(se activo pop e imap en config y se genero contraseña de aplicacion python que esta en codigo): 
+( en settings.py se activo pop e imap en config y se genero contraseña de aplicacion python que esta en codigo): 
 josalasolivares@gmail.com
 
-El link de generar contraseña lo envía a la consola de nuestra aplicación (de momento)
+
+
+
+
+
+---------------------------------------------
+OTRAS COSAS LINUX , REDES , MOBILE ETC:
+
+------------->LINUX KALI<-------------------------
+pwd
+(primero crear red nad con todas las ip .0/24 al final para que se puedan comunicar lasmaquinas virtuales entre si)
+setxkbmap -layout latam
+sudo netdiscover
+clear
+nmap 192.168.200.5
+nmap -sV 192.168.200.5
+sudo nmap -sV -O 192.168.200.5
+nmap -sV --script vuln 192.168.200.5
+
+sudo gvm-start (hacer target con la ip a vulnerar y el task para poder hacer los reportes)
+
+
+msfconsole       (metaxploit)
+
+
+search ( elnombre del service para ver que exploits hay para usar y investigar que se puede hacer)
+
+set LHOST 172.... TUYO
+set RHOST 172.... IP ATACAR
+set L/RPORT  EN CASO
+
+---------->REDES<--------------------
+AYUDAS ( TABULACION, BARRA ESPACIADORA, FLECHA ARRIBA, ? , CTRL MAYUS 6 este anula comandos como trace y ping)
+
+ipconfig
+netsh wlan show all
+ping 192.168.0.1 (probar conectividad con otro equipo)
+
+enable (modo privilegiado en switch terminal)
+configure terminal
+hostname S1 (nuevo nombre envez de switch)
+line console 0
+password cisco<-- contraseña
+login ( para q empieze a pedir contraseña)
+line vty 0 15
+>repetir password y login<
+end
+exit
+enable secret class<---contraseña (asignar contraseña a modo privilegiado)
+service password-encryption
+banner motd "EL ACCESO ESTA RESTRINGIDO A SOLO PERSONAL AUTORIZADO"
+interface vlan 1 
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+end
+copy running-config startup-config (Si se reinicia el switch, se carga la nueva configuración.)
+running-config startup-config
+interface ?(activar interface que necesitemos viendo cuales estan)
+show running-config
+show version (informacion util switch y yios)
+show ip interface brief (estado interfaces)
+transport input telnet
+telnet 192.168.1.1
+ip config /all
+show mac-adress-table
+ip default-gateway 172.16.100.1
+int g0/0/0
+ipv6 adress 2001:db8:acad::1/64
+ipv6 adress fe80::1 link-local
+no shutdown
+int g0/0/1
+description Connect to PC-B
+description Connect to S1
+ipv6 unicast-routing
+end
+copy running-config startup-config
+clock set ?
+clock set 11:08:20 ?
+clock set 11:08:20 7 July 2022
+ip default-gateway 192.168.1.1
+end
+copy running-config startup-config
+ping 192.168.168.0.3
+ping 2001:db8:acad::3
+show ip interface brief
+show ipv6 interface brief
+show ip interface brief
+
+
+--------------->   APLICACIONES MOVILES       <-------------
+               INSTALAR NODE.JS PARA USAR ESTOS COMANDOS
+
+node --version
+
+npm --version
+
+ionic --version
+
+npm install -g @ionic/cli@latest
+npm install -g @ionic/cli
+
+Set-ExecutionPolicy Unrestricted
+
+ionic
+
+ionic start Proyecto blank //blank, tabs, y sidemenu
+
+npm uninstall -g capacitor
+
+-YA EN PROYECTO CREADO
+
+ionic serve 
+
+ionic serve --lab
+
+ionic generate page nombrepage
+
+ionic generate component nombrecomponent
+
+ionic generate service nombreservice
+
+ionic generate interface interfaces/IAgenda
+
+-ANGULAR( SE PUEDE USAR AL MISMO TIEMPO Q IONIC VIENEN JUNTOS)
+
+npm install -g @angular/cli@latest
+
+ng add @angular/material
+
+npm install @ionic/storage-angular   
+npm install -g json-server
+json-server -H 192.168.1.33 .\db.json
+
+npm install -g protractor
+webdriver-manager update
+webdriver-manager start 
+ionic start e2e-example-tabs tabs --type=angular
+cd .\e2e-example-tabs\
+npm run e2e
+ionic cap sync
+
+
+Comandos para android
+
+
+ionic build
+ionic capacitor add android
+ionic cordova add android
+ionic capacitor copy android
+ionic capacitor open android
+
 
