@@ -6,6 +6,7 @@ Implementar link de pago mercado pago
 Implementar que cuando pague le envie por mail los detalles en pdf
 Implementar que cuando haya pagado el producto se reste del inventario recien
 Implementar todo el sistema juntoen su base de datos
+Implementar formulario que envie mail conel codigo ya tenemos wue pida datos de persona que se quiere comunicsr incluyendo mail nombre empresa rut y descripcion etc
 Implementar ORACLESQLXE
 Implementar Mysql (paracpanel)
 Implementar adapatar users login a nueva base de datos a users de django y adaptar roles y crear nuevo rol usuario
