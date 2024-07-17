@@ -128,7 +128,7 @@ import firebase_admin
 from firebase_admin import credentials
 
 
-cred = credentials.Certificate("SistemaVentas/josatelweb-firebase-adminsdk-xu1fc-fc895503e3.json")
+cred = credentials.Certificate("SistemaVentas/josatelweb-firebase-adminsdk-xu1fc-71f3677d40.json")
 firebase_admin.initialize_app(cred)
 
 
