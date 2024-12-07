@@ -128,7 +128,7 @@ import firebase_admin
 from firebase_admin import credentials
 
 
-cred = credentials.Certificate("SistemaVentas/josatelweb-firebase-adminsdk-xu1fc-71f3677d40.json")
+cred = credentials.Certificate("SistemaVentas/josatelweb-firebase-adminsdk-xu1fc-f7e3fd39e7.json")
 firebase_admin.initialize_app(cred)
 
 
@@ -138,4 +138,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'josalasolivares@gmail.com'
-EMAIL_HOST_PASSWORD= 'vrqehvbccruzvlgj'
+EMAIL_HOST_PASSWORD= 'irljqdwjenxabapz'
